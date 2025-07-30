@@ -1,11 +1,32 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Antihero from '../components/Antihero.astro';
+import Header from '../components/Header.astro';
+import SectionCards from '../components/SectionCards.astro';
+import AccesoriosHome from '../components/AccesoriosHome.astro';
+// import DestacadosHome from '../components/React/DestacadosHome.jsx';
+import DestacadosHome from '../components/DestacadosHome.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+import { getCollection } from 'astro:content';
+const guias = await getCollection('guias', ({ data }) => data.home === true);
+const juegos = await getCollection('juegos', ({ data }) => data.home === true);
+const accesorios = await getCollection('accesorios', ({ data }) => data.home === true);
+// const guias = await getCollection('guias');
+
 ---
 
 <Layout>
-	<Welcome />
+	
+	<Header />
+	<Hero />
+
+	<main class="my-4 w-9/12 mx-auto m-auto">
+		<DestacadosHome items={guias}/>
+		<SectionCards items={juegos} />
+		<AccesoriosHome items={accesorios} />
+	</main>	
+
+	<Antihero />
 </Layout>

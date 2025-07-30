@@ -1,0 +1,64 @@
+---
+let { items } = Astro.props;
+let accesorios = items.sort(() => Math.random() - 0.5);
+accesorios = accesorios.map(item => item.data);
+
+
+---
+
+<section class="my-4 w-full px-6 md:px-16 py-12">
+  <div class="grid grid-cols-3 gap-4 w-full">
+    {(() => {
+      // Define el patrón de colSpan por fila
+      const pattern = [
+        [2, 1],    // fila 1: 2/3 y 1/3
+        [1, 2],    // fila 2: 1/3 y 2/3
+        [1, 1, 1], // fila 3: 1/3, 1/3, 1/3
+      ];
+      let items = [];
+      let accIdx = 0;
+      let rowIdx = 0;
+      while (accIdx < accesorios.length) {
+        const row = pattern[rowIdx % pattern.length];
+        let rowItems = [];
+        for (let i = 0; i < row.length && accIdx < accesorios.length; i++, accIdx++) {
+          const accesorio = accesorios[accIdx];
+          const colSpan = row[i];
+          rowItems.push(
+            <a
+              href={accesorio.enlace}
+              class={`relative rounded-3xl overflow-hidden bg-gradient-to-br from-zinc-900 to-zinc-700 
+                hover:scale-105 hover:contrast-115 duration-300 flex flex-col items-start
+                transition
+                col-span-${colSpan}
+                p-7 min-h-[300px]
+                group
+              `}
+              style="min-width:0"
+            >
+              {(() => {
+                const svgs = [
+                  `<svg class="absolute fill-zinc-800 z-0 w-full bottom-0 left-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,224C384,224,480,256,576,234.7C672,213,768,139,864,122.7C960,107,1056,149,1152,186.7C1248,224,1344,256,1392,272L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>`,
+                  `<svg class="absolute fill-zinc-800 z-0 w-full bottom-0 left-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,160L48,181.3C96,203,192,245,288,261.3C384,277,480,267,576,229.3C672,192,768,128,864,122.7C960,117,1056,171,1152,208C1248,245,1344,267,1392,277.3L1440,288L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>`,
+                  `<svg class="absolute fill-zinc-800 z-0 w-full bottom-0 left-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,224L48,224C96,224,192,224,288,240C384,256,480,288,576,298.7C672,309,768,299,864,288C960,277,1056,267,1152,240C1248,213,1344,171,1392,149.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>`
+                ];
+                const svgIdx = Math.floor(Math.random() * svgs.length);
+                return <span set:html={svgs[svgIdx]} />;
+              })()}
+              <img width="400" class="z-1 absolute -bottom-20 -right-20 transition-all duration-300 group-hover:rotate-12 group-hover:scale-140 group-hover:-bottom-0 group-hover:-right-0" src={accesorio.modelo} alt={accesorio.title} />
+              <div class="z-4 absolute bottom-0 left-0 w-full flex flex-col justify-end gap-4 p-4">
+                <h2 class="font-bold text-2xl">{accesorio.title}</h2>
+                <span>{accesorio.caption}</span>
+              </div>
+              <span class="z-3 absolute h-full duration-700 bottom-0 right-0 transition-all w-0 group-hover:w-120 bg-gradient-to-l from-zinc-800/50 to-zinc-500/0"></span>
+            </a>
+          );
+        }
+        items = items.concat(rowItems);
+        rowIdx++;
+      }
+      return items;
+    })()}
+  </div>
+</section>
+<div class="col-span-2 col-span-1 col-span-3"></div>

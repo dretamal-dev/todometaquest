@@ -1,0 +1,177 @@
+---
+
+let { items } = Astro.props;
+items = items.sort(() => Math.random() - 0.5);
+items = items.map(item => item.data).slice(0, 5);
+
+---
+
+<article class="flex flex-col items-center mb-12 w-11/12 mx-auto" id="destacados-home">
+  <div
+    id="destacados-main"
+    class="bg-top overflow-hidden w-full h-140 rounded-2xl flex flex-col items-center justify-center mb-8 bg-gradient-to-br from-zinc-950 to-zinc-900 shadow-2xl transition-all duration-300 relative"
+    style={`background-image: url(${items[0].img}); background-size: cover;`}
+  >
+    <span id="destacados-category" class="absolute mt-4 mr-8 top-0 right-0 bg-blue-200 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full mb-4 z-10">
+      {items[0].category || 'Sin categoría'}
+    </span>
+    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/100 to-zinc-900/0 rounded-2xl pointer-events-none"></div>
+    <div class="absolute flex flex-col m-6 gap-4 bottom-0 left-0">
+      <h2 id="destacados-title" class="text-5xl font-bold text-gray-100 mb-2 relative z-10">{items[0].title}</h2>
+      <p id="destacados-desc" class="max-w-2xl text-pretty text-gray-200 text-xl text-left mb-4 relative z-10">{items[0].description}</p>
+      <a
+        id="destacados-link"
+        href={items[0].link || '#'}
+        class="text-white hover:scale-105 transition-all  bg-gradient-to-br from-pink-800 to-pink-500 px-5 py-2 rounded-lg font-medium duration-200 relative z-10"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="width: fit-content;"
+      >
+        Ver contenido
+      </a>
+    </div>
+    <div id="destacados-progress-container" class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-br from-zinc-900 to-zinc-800 overflow-hidden">
+      <div id="destacados-progress" class="h-full bg-gradient-to-r from-pink-800 to-pink-500 transition-all duration-100" style="width: 0%;"></div>
+    </div>
+  </div>
+  <div class="flex gap-3 w-full max-w-6xl">
+    {items.map((item, idx) => {
+      let roundedClass = '';
+      if (idx === 0) roundedClass = 'rounded-l-2xl';
+      else if (idx === items.length - 1) roundedClass = 'rounded-r-2xl';
+      return (
+        <button
+          class={`h-20 w-full cursor-pointer py-6 flex items-center justify-center font-semibold text-sm px-2 transition-colors duration-200 focus:outline-none
+            ${idx === 0
+              ? 'bg-gradient-to-br from-zinc-900 to-zinc-800 shadow-lg scale-105'
+              : 'bg-gradient-to-br from-zinc-950 to-zinc-900 text-gray-400 hover:from-zinc-900 hover:to-zinc-800'}
+            ${roundedClass}
+          `}
+          type="button"
+          data-idx={idx}
+          style="flex: 1; min-width: 0;"
+        >
+          {item.title}
+        </button>
+      );
+    })}
+  </div>
+</article>
+
+<script define:vars={{items}} is:inline>
+  
+  let currentIdx = 0;
+  let intervalId;
+  let autoplay = true;
+
+  function showItem(idx) {
+    const main = document.getElementById('destacados-main');
+    const category = document.getElementById('destacados-category');
+    const title = document.getElementById('destacados-title');
+    const desc = document.getElementById('destacados-desc');
+    const link = document.getElementById('destacados-link');
+    const buttons = document.querySelectorAll('[data-idx]');
+
+    const item = items[idx];
+    main.style.backgroundImage = `url(${item.img})`;
+    category.textContent = item.category || 'Sin categoría';
+    title.textContent = item.title;
+    desc.textContent = item.description;
+    link.href = item.link || '#';
+
+    buttons.forEach((b, i) => {
+      if (i === idx) {
+        b.classList.add('bg-gradient-to-br', 'from-zinc-900', 'to-zinc-800', 'shadow-lg', 'scale-105');
+        b.classList.remove('text-gray-400');
+      } else {
+        b.classList.remove('bg-gradient-to-br', 'from-zinc-900', 'to-zinc-800', 'shadow-lg', 'scale-105');
+        b.classList.add('bg-gradient-to-br', 'from-zinc-950', 'to-zinc-900', 'text-gray-400');
+      }
+    });
+    currentIdx = idx;
+  }
+
+  function startRotation() {
+
+    autoplay = true;
+    const progress = document.getElementById('destacados-progress');
+    let startTime = Date.now();
+    let duration = 5000;
+
+    // Reset progress bar
+    if (progress) progress.style.width = '0%';
+
+    // Animate progress bar with more accurate timing
+    let animationFrameId;
+    function animateProgress() {
+      if (!autoplay) return;
+      let elapsed = Date.now() - startTime;
+      let percent = Math.min((elapsed / duration) * 100, 100);
+      if (progress) progress.style.width = percent + '%';
+      if (percent < 100) {
+      animationFrameId = requestAnimationFrame(animateProgress);
+      } else {
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      }
+    }
+    animateProgress();
+
+    intervalId = setInterval(() => {
+      if (!autoplay) return;
+      let nextIdx = (currentIdx + 1) % items.length;
+      showItem(nextIdx);
+
+      // Reset progress bar for next interval
+      startTime = Date.now();
+      if (progress) progress.style.width = '0%';
+      animateProgress();
+    }, duration);
+  }
+
+  function stopRotation() {
+    autoplay = false;
+    clearInterval(intervalId);
+  }
+
+  
+  document.addEventListener('astro:page-load', () => {
+    startRotation();
+    const buttons = document.querySelectorAll('[data-idx]');
+    buttons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        stopRotation();
+        showItem(idx);
+      });
+    });
+  });
+
+  document.addEventListener('astro:page-load', () => {
+    const main = document.getElementById('destacados-main');
+    const category = document.getElementById('destacados-category');
+    const title = document.getElementById('destacados-title');
+    const desc = document.getElementById('destacados-desc');
+    const link = document.getElementById('destacados-link');
+    const buttons = document.querySelectorAll('[data-idx]');
+
+    buttons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        const item = items[idx];
+        main.style.backgroundImage = `url(${item.img})`;
+        category.textContent = item.category || 'Sin categoría';
+        title.textContent = item.title;
+        desc.textContent = item.description;
+        link.href = item.link || '#';
+
+        buttons.forEach((b, i) => {
+          if (i === idx) {
+            b.classList.add('bg-gradient-to-br', 'from-zinc-900', 'to-zinc-800', 'shadow-lg', 'scale-105');
+            b.classList.remove('text-gray-400');
+          } else {
+            b.classList.remove('bg-gradient-to-br', 'from-zinc-900', 'to-zinc-800', 'shadow-lg', 'scale-105');
+            b.classList.add('bg-gradient-to-br', 'from-zinc-950', 'to-zinc-900', 'text-gray-400');
+          }
+        });
+      });
+    });
+  });
+</script>

@@ -1,0 +1,31 @@
+---
+const { label, href = "#" } = Astro.props;
+ let randomId = Math.random().toString(36).substring(2, 15);
+---
+<a 
+  href={href} 
+  class="group relative inline-block bg-slate-800 hover:bg-pink-600 transition-colors duration-300 px-5 py-3 h-[40px] w-[200px]"
+  id={`${randomId}`}
+>
+  <i style="background: linear-gradient(var(--x), #0ea5e9, #06b5d400, #06b5d400, rgb(238, 5, 226))" class="absolute inset-[-2px] block rounded"></i>
+  <i style="background: linear-gradient(var(--x), #0ea5e9, #06b5d400, #06b5d400, rgb(238, 5, 226))" class="absolute inset-[-2px] block rounded blur-2xl"></i>
+  <span class="font-bold tracking-wide
+ overflow-hidden before:bg-slate-500/20 before:skew-x-[25deg] before:absolute  before:top-0 before:-left-[50%] before:content-[''] before:w-full 
+ before:h-full absolute border-1 border-slate-800 text-white top-0 left-0 w-full h-full flex align-center 
+ items-center justify-center bg-slate-700/65 rounded"><span class="text-sm transition-all duration-100 group-hover:scale-105">
+    {label}   
+</span></span>
+
+</a>
+
+<script type="module" define:vars={{ randomId }}>
+  const boton = document.getElementById(randomId);
+  if (boton) {
+    boton.addEventListener('mousemove', (e) => {
+      let rect = e.target.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      boton.style.setProperty('--x', x + 'deg');
+    });
+  }
+</script>
+<style>:root {--x: 45deg;}</style>
