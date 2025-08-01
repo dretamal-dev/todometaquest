@@ -30,7 +30,7 @@ const juegos = defineCollection({
 
 const accesorios = defineCollection({
   schema: z.object({
-    // date: z.date(),
+    date: z.date(),
     title: z.string(),
     author: z.string(),
     // img: z.string().url(),

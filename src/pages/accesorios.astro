@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ShortHero from '../components/ShortHero.astro';
+import Card from '../components/Card.astro';
+import Header from '../components/Header.astro';
+import Filter from '../components/React/Filter.jsx';
+
+import { getOptimizedImage } from '/src/utils/imageUtils.js';
+
+
+import { getCollection } from 'astro:content';
+const accesorios = await getCollection('accesorios');
+
+---
+
+<Layout>
+	
+	<Header />
+
+	<ShortHero 
+		title="Los mejores accesorios para Meta Quest 3" 
+		description="Descubre los mejores accesorios para Meta Quest 3: mejora tu experiencia de realidad virtual con fundas, correas, baterías, estuches y más. Encuentra recomendaciones, análisis y consejos para sacar el máximo partido a tu visor."
+		image={getOptimizedImage('/images/general/accesorios-meta-quest-3.webp', false)}
+		bgposition="bottom"
+	>
+		<div class="z-2 absolute bottom-0 mb-4">
+			<Filter target=".js-filter-box" client:load/>
+		</div>
+	</ShortHero> 
+
+	<section aria-label="Artículos sobre accesorios para Meta Quest 3" class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
+			{accesorios.map(accesorio => (
+				<Card date={accesorio.data.date} tags={accesorio.data.tags} title={accesorio.data.title} description={accesorio.data.description} image={getOptimizedImage(accesorio.data.img, 400)} link={'/accesorios/' + accesorio.slug} />
+			))}
+	</section>	
+
+</Layout>
+

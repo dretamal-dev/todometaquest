@@ -22,11 +22,11 @@ const guias = await getCollection('guias');
 		</div>
 	</ShortHero> 
 
-	<main class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
+	<section aria-label="Guías para Meta Quest 3"  class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
 			{guias.map(guia => (
 				<Card date={guia.data.date} tags={guia.data.tags} title={guia.data.title} description={guia.data.description} image={getOptimizedImage(guia.data.img,400)} link={'/guias/' + guia.slug} />
 			))}
-	</main>	
+	</section>	
 
 </Layout>
 

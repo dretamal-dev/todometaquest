@@ -3,14 +3,14 @@ const { title, description, image , bgposition = 'center' } = Astro.props;
 
 
 ---
-<section class="relative h-[80vh] flex flex-col items-center justify-center text-center bg-gradient-to-b from-zinc-900 to-slate-800">
+<header class="relative h-[80vh] flex flex-col items-center justify-center text-center bg-gradient-to-b from-zinc-900 to-slate-800">
   <div 
     class={`bg-${bgposition} absolute w-full h-full object-cover z-0 mask-b-from-20% mask-b-to-90% bg-cover bg-center opacity-90`}
     style={`background-image: url('${image}');`}
   ></div>
-  <article class="z-10">
-    <h1 class="text-4xl md:text-6xl font-bold mb-4">{title}</h1>
+  <div class="z-10 w-9/12 ">
+    <h1 class="transition-all duration-200 hover:animate-glitch text-4xl md:text-6xl font-bold mb-4">{title}</h1>
     <p class="text-lg mb-6">{description}</p>
-  </article>
+  </div>
   <slot/>  
-</section>
+</header>

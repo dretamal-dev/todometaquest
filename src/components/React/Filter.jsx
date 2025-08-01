@@ -207,7 +207,7 @@ function Filter({target}) {
                 )}
                 <button
                   type="button"
-                  className="active:bg-gray-800 font-mono text-xs cursor-pointer bg-gray-900/80 p-2 rounded-md max-h-8 text-gray-200/10 border-1 border-gray-200/10 transition-all duration-200 hover:border-gray-200 hover:text-gray-200"
+                  className="hover:animate-glitch active:bg-gray-800 font-mono text-xs cursor-pointer bg-gray-900/80 p-2 rounded-md max-h-8 text-gray-200/10 border-1 border-gray-200/10 transition-all duration-200 hover:border-gray-200 hover:text-gray-200"
                   onClick={(e) => {
                     setFilter({});
                     setCheckedState({});

@@ -28,11 +28,11 @@ const juegos = await getCollection('juegos');
 		</div>
 	</ShortHero> 
 
-	<main class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
+	<section aria-label="Artículos sobre juegos para Meta Quest 3" class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
 			{juegos.map(juego => (
 				<Card date={juego.data.date} tags={juego.data.tags} title={juego.data.title} description={juego.data.description} image={getOptimizedImage(juego.data.img, 400)} link={'/juegos/' + juego.slug} />
 			))}
-	</main>	
+	</section>	
 
 </Layout>
 
