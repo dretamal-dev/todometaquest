@@ -4,13 +4,15 @@ const { title, description, image, link, tags, date} = Astro.props;
 
 <article
   data-jsfilter-search={title} 
-  data-jsfilter-check-tags={tags.join(",")}
+  data-jsfilter-check-tags={tags?tags.join(","):''}
   style={`background-image: url('${image}');`} 
   class="group w-[400px] min-w-[400px] max-w-[400px] hover:contrast-115 min-h-[200px] bg-cover bg-no-repeat bg-center rounded-2xl overflow-hidden shadow-xl flex flex-col relative hover:scale-105 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-orange-500"
 >
-  <div class="absolute top-2 right-2">
-    <span class="text-xs border-1 bg-pink-700/40 border-pink-700 px-1 py-0.5 rounded-lg">{tags.join(", ")}</span>
-  </div>
+  {tags && tags.length > 0 && (
+    <div class="absolute top-2 right-2">
+      <span class="text-xs border-1 bg-pink-700/40 border-pink-700 px-1 py-0.5 rounded-lg">{tags.join(", ")}</span>
+    </div>
+  )}
   <div class="absolute top-2 left-2">
     <span class="text-xs  group-hover:bg-black/60 border-1 border-white bg-white/10 px-1 py-0.5 rounded-lg">
       {new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' })}

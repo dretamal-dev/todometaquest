@@ -5,5 +5,6 @@ img: /images/guias/arreglar.jpg
 readtime: 224
 description: "Acabas de estrenar tu Quest 3: aquí tienes los juegos básicos que no pueden faltar."
 home: true
+date: 2024-01-31
 ---
 Esto es una prueba del contenido de un MD **mira como mola**.

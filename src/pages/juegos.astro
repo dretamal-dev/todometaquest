@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ShortHero from '../components/ShortHero.astro';
+import Card from '../components/Card.astro';
+import Header from '../components/Header.astro';
+import Filter from '../components/React/Filter.jsx';
+
+import { getOptimizedImage } from '/src/utils/imageUtils.js';
+
+
+import { getCollection } from 'astro:content';
+const juegos = await getCollection('juegos');
+
+---
+
+<Layout>
+	
+	<Header />
+
+	<ShortHero 
+		title="Juegos para Meta Quest 3 y Realidad Virtual" 
+		description="Explora guías, juegos y accesorios para disfrutar al máximo tu experiencia de realidad virtual" 
+		image={getOptimizedImage('/images/juegos/juegos-realidad-virtual.webp', false)}
+		bgposition="top"
+	>
+		<div class="z-2 absolute bottom-0 mb-4">
+			<Filter target=".js-filter-box" client:load/>
+		</div>
+	</ShortHero> 
+
+	<main class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
+			{juegos.map(juego => (
+				<Card date={juego.data.date} tags={juego.data.tags} title={juego.data.title} description={juego.data.description} image={getOptimizedImage(juego.data.img, 400)} link={'/juegos/' + juego.slug} />
+			))}
+	</main>	
+
+</Layout>
+

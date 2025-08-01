@@ -5,7 +5,7 @@ import Card from '../components/Card.astro';
 import Header from '../components/Header.astro';
 import Filter from '../components/React/Filter.jsx';
 
-
+import { getOptimizedImage } from '/src/utils/imageUtils.js';
 
 import { getCollection } from 'astro:content';
 const guias = await getCollection('guias');
@@ -16,7 +16,7 @@ const guias = await getCollection('guias');
 	
 	<Header />
 
-	<ShortHero title="Guías Meta Quest 3" description="Explora guías, juegos y accesorios para disfrutar al máximo tu experiencia de realidad virtual" image="/images/guias/guias-informacion-meta-quest-3.webp">
+	<ShortHero title="Guías Meta Quest 3" description="Explora guías, juegos y accesorios para disfrutar al máximo tu experiencia de realidad virtual" image={getOptimizedImage('/images/guias/guias-informacion-meta-quest-3.webp', false)}>
 		<div class="z-2 absolute bottom-0 mb-4">
 			<Filter target=".js-filter-box" client:load/>
 		</div>
@@ -24,7 +24,7 @@ const guias = await getCollection('guias');
 
 	<main class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
 			{guias.map(guia => (
-				<Card date={guia.data.date} tags={guia.data.tags} title={guia.data.title} description={guia.data.description} image={guia.data.img} link={'/guias/' + guia.slug} />
+				<Card date={guia.data.date} tags={guia.data.tags} title={guia.data.title} description={guia.data.description} image={getOptimizedImage(guia.data.img,400)} link={'/guias/' + guia.slug} />
 			))}
 	</main>	
 

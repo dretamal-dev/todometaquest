@@ -1,11 +1,11 @@
 ---
-const { title, description, image } = Astro.props;
+const { title, description, image , bgposition = 'center' } = Astro.props;
 
 
 ---
 <section class="relative h-[80vh] flex flex-col items-center justify-center text-center bg-gradient-to-b from-zinc-900 to-slate-800">
   <div 
-    class="absolute w-full h-full object-cover z-0 mask-b-from-20% mask-b-to-90% bg-cover bg-center opacity-90"
+    class={`bg-${bgposition} absolute w-full h-full object-cover z-0 mask-b-from-20% mask-b-to-90% bg-cover bg-center opacity-90`}
     style={`background-image: url('${image}');`}
   ></div>
   <article class="z-10">

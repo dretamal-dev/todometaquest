@@ -1,0 +1,290 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ShortHero from '../components/ShortHero.astro';
+import Card from '../components/Card.astro';
+import Header from '../components/Header.astro';
+import Filter from '../components/React/Filter.jsx';
+
+import { getOptimizedImage } from '/src/utils/imageUtils.js';
+
+const terminos = [
+  {
+    "term": "VR",
+    "description": "Realidad virtual: tecnología que simula entornos tridimensionales inmersivos mediante un visor."
+  },
+  {
+    "term": "AR",
+    "description": "Realidad aumentada: superpone elementos virtuales sobre el mundo real."
+  },
+  {
+    "term": "MR",
+    "description": "Realidad mixta: fusión avanzada entre realidad virtual y aumentada, con interacción bidireccional."
+  },
+  {
+    "term": "Passthrough",
+    "description": "Vista en tiempo real del entorno real a través de las cámaras del visor."
+  },
+  {
+    "term": "PCVR",
+    "description": "Realidad virtual que depende de un ordenador para funcionar, como con SteamVR o Oculus Link."
+  },
+  {
+    "term": "Standalone VR",
+    "description": "Visores que no necesitan PC ni cables, como Meta Quest 3."
+  },
+  {
+    "term": "Foveated Rendering",
+    "description": "Técnica que mejora el rendimiento renderizando en alta calidad solo donde se enfoca la vista."
+  },
+  {
+    "term": "Hand Tracking",
+    "description": "Tecnología que permite usar las manos directamente como controladores en VR, sin mandos."
+  },
+  {
+    "term": "6DOF",
+    "description": "Seis grados de libertad: permite movimiento libre en 3D (rotación y desplazamiento)."
+  },
+  {
+    "term": "3DOF",
+    "description": "Tres grados de libertad: solo permite rotar la cabeza, sin moverse en el espacio."
+  },
+  {
+    "term": "Guardian",
+    "description": "Sistema de límites virtuales que evita que el usuario salga del área segura de juego."
+  },
+  {
+    "term": "Inside-out Tracking",
+    "description": "Seguimiento espacial que se realiza desde las cámaras del visor sin sensores externos."
+  },
+  {
+    "term": "Outside-in Tracking",
+    "description": "Seguimiento que depende de sensores externos para rastrear el movimiento del visor y mandos."
+  },
+  {
+    "term": "Oculus Link",
+    "description": "Sistema que permite conectar Quest a un PC mediante cable para jugar a juegos de PCVR."
+  },
+  {
+    "term": "Air Link",
+    "description": "Versión inalámbrica de Oculus Link que permite transmitir juegos de PC al visor vía Wi-Fi."
+  },
+  {
+    "term": "Streaming VR",
+    "description": "Reproducción de contenido VR desde otro dispositivo al visor, ya sea vídeo o juegos."
+  },
+  {
+    "term": "Refresh Rate",
+    "description": "Frecuencia de actualización de imagen, medida en Hz. Afecta a la fluidez de la experiencia."
+  },
+  {
+    "term": "IPD",
+    "description": "Interpupillary Distance: distancia entre pupilas, ajustable para mejorar claridad y comodidad."
+  },
+  {
+    "term": "Haptics",
+    "description": "Retroalimentación táctil en mandos o visores para simular sensación de contacto o vibración."
+  },
+  {
+    "term": "Roomscale",
+    "description": "Experiencia VR que requiere moverse físicamente por una habitación o espacio amplio."
+  },
+  {
+    "term": "Seated VR",
+    "description": "Modalidad de VR pensada para jugar sentado, ideal para espacios reducidos."
+  },
+  {
+    "term": "Meta Quest Store",
+    "description": "Tienda oficial de aplicaciones y juegos para visores Meta Quest."
+  },
+  {
+    "term": "SideQuest",
+    "description": "Plataforma alternativa para instalar apps y juegos no oficiales en dispositivos Quest."
+  },
+  {
+    "term": "App Lab",
+    "description": "Sistema de distribución oficial de Meta para apps en desarrollo o fuera de la tienda principal."
+  },
+  {
+    "term": "Beat Saber",
+    "description": "Juego musical emblemático de VR donde cortas bloques al ritmo de la música con sables de luz."
+  },
+  {
+    "term": "SteamVR",
+    "description": "Plataforma de Valve para realidad virtual en PC, compatible con múltiples visores."
+  },
+  {
+    "term": "Virtual Desktop",
+    "description": "Aplicación que permite acceder al escritorio de tu PC desde el visor VR e incluso jugar en streaming."
+  },
+  {
+    "term": "Tracking",
+    "description": "Capacidad del sistema VR para seguir los movimientos del usuario en tiempo real."
+  },
+  {
+    "term": "Latency",
+    "description": "Tiempo que tarda una acción física en reflejarse en el visor. Menor latencia = mejor experiencia."
+  },
+  {
+    "term": "Field of View (FOV)",
+    "description": "Campo de visión visible dentro del visor. Más FOV = mayor inmersión."
+  },
+  {
+    "term": "Meta Quest+",
+    "description": "Servicio de suscripción de Meta que ofrece juegos mensuales para los usuarios de Quest."
+  },
+  {
+    "term": "Mixed Reality Apps",
+    "description": "Aplicaciones que combinan elementos reales y virtuales mediante passthrough y realidad mixta."
+  },
+  {
+    "term": "Virtual Theater",
+    "description": "Aplicación o modo que simula una sala de cine para ver películas en VR."
+  },
+  {
+    "term": "Motion Sickness",
+    "description": "Mareo o malestar que pueden experimentar algunos usuarios por desincronización visual y física."
+  },
+  {
+    "term": "Controller Drift",
+    "description": "Problema donde los mandos envían señales erróneas de movimiento sin tocarlos."
+  },
+  {
+    "term": "Rendering",
+    "description": "Proceso de generación de imágenes en 3D en tiempo real por la GPU del visor o el PC."
+  },
+  {
+    "term": "Tracking Loss",
+    "description": "Situación en la que el visor o mandos dejan de ser rastreados correctamente por un momento."
+  },
+  {
+    "term": "Play Area",
+    "description": "Espacio delimitado y seguro para moverse al usar un visor VR con roomscale."
+  },
+  {
+    "term": "Meta Horizon Home",
+    "description": "Entorno virtual base en el visor Quest donde puedes moverte, socializar y lanzar apps."
+  },
+  {
+    "term": "Guardian Reset",
+    "description": "Reconfiguración del límite de juego virtual cuando se cambia de habitación o zona."
+  },
+  {
+    "term": "Content Sideloading",
+    "description": "Instalación de contenido no oficial o no aprobado por Meta en el visor Quest."
+  },
+  {
+    "term": "Frame Rate",
+    "description": "Número de imágenes por segundo que genera el visor o el PC. Afecta a la fluidez y comodidad."
+  },
+  {
+    "term": "Touch Controllers",
+    "description": "Mandos diseñados para Meta Quest que detectan posición y gestos de la mano."
+  },
+  {
+    "term": "Passthrough Color",
+    "description": "Vista del mundo real a color a través de cámaras, disponible en Quest 3 y superiores."
+  },
+  {
+    "term": "XR",
+    "description": "Extended Reality: término general que engloba VR, AR y MR."
+  },
+  {
+    "term": "Pico",
+    "description": "Competidor de Meta Quest fabricado por ByteDance, con visores como Pico 4."
+  },
+  {
+    "term": "Guardian Boundaries",
+    "description": "Líneas virtuales que aparecen cuando te acercas al límite del área segura."
+  },
+  {
+    "term": "Meta Horizon Worlds",
+    "description": "Plataforma social de Meta donde los usuarios crean y exploran mundos virtuales."
+  },
+  {
+    "term": "Voice Commands",
+    "description": "Comandos por voz para controlar el visor o realizar acciones sin usar las manos."
+  },
+	{
+    "term": "Headstrap",
+    "description": "Cinta de sujeción del visor. Las versiones mejoradas ofrecen más confort y equilibrio."
+  },
+  {
+    "term": "VRChat",
+    "description": "Plataforma social en VR para crear avatares, mundos y socializar con otras personas."
+  },
+	{
+    "term": "Avatar VR",
+    "description": "Representación virtual de un usuario dentro del mundo VR."
+  },
+	{
+    "term": "Developer Mode",
+    "description": "Modo que permite instalar apps externas, hacer sideloading o desarrollar para Quest."
+  },
+  {
+    "term": "Unity VR",
+    "description": "Motor gráfico usado para desarrollar muchas experiencias VR compatibles con Quest."
+  },
+	{
+    "term": "Sideloading",
+    "description": "Instalación manual de aplicaciones fuera de la tienda oficial."
+  },
+	{
+    "term": "Charging Dock",
+    "description": "Estación de carga para visores y mandos, ideal para mantener todo listo y organizado."
+  },
+	{
+    "term": "Link Cable",
+    "description": "Cable USB-C de alta velocidad usado para conectar Quest a PC y jugar en modo PCVR."
+  },
+	{
+    "term": "Horizon Workrooms",
+    "description": "Espacio virtual de reuniones y trabajo colaborativo de Meta."
+  },
+	{
+    "term": "360 Video",
+    "description": "Vídeo grabado en todas direcciones, visible en VR como si estuvieras dentro de la escena."
+  },
+];
+
+terminos.sort((a, b) => a.term.localeCompare(b.term));
+
+---
+
+<Layout>
+	
+	<Header />
+
+	<ShortHero 
+		title="Diccionario de términos sobre Realidad Virtual" 
+		description="Explora nuestro diccionario de términos sobre Realidad Virtual y conoce los conceptos clave para entender esta tecnología innovadora."
+		image={getOptimizedImage('/images/general/diccionario-terminos-meta-quest-3-realidad-virtual.webp', false)}
+		bgposition="center"
+	>
+		<div class="z-2 absolute bottom-0 mb-4">
+			<Filter target=".js-filter-box" client:load/>
+		</div>
+	</ShortHero> 
+
+	<main class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
+			<ul>
+
+				{terminos.map(termino => (
+					<li
+						data-jsfilter-search={termino.term} 
+					>
+						<strong>{termino.term}</strong>: {termino.description}
+					</li>
+				))}
+			</ul>
+
+			<div class="relative w-80 bg-white rounded-lg shadow-lg overflow-hidden">
+				<div class="p-6">
+					<h2 class="text-xl font-bold mb-2">Ejemplo de Card</h2>
+					<p class="text-gray-700">Esta card tiene la esquina superior derecha cortada en diagonal y es transparente en esa zona.</p>
+				</div>
+				<div class="absolute top-0 right-0 w-20 h-20 pointer-events-none z-10" style="clip-path: polygon(100% 0, 0 0, 100% 100%); background: transparent;"></div>
+			</div>
+	</main>	
+
+</Layout>
+

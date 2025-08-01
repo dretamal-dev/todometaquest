@@ -5,5 +5,6 @@ img: /images/guias/arreglar.jpg
 readtime: 224
 description: "Perfectos para espacios pequeños: juegos VR ideales para jugar sin levantarte."
 home: true
+date: 2024-01-31
 ---
 Esto es una prueba del contenido de un MD **mira como mola**.

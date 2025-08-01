@@ -7,7 +7,7 @@ const juegos = await getCollection('juegos', ({ data }) => data.home === true);
 const accesorios = await getCollection('accesorios', ({ data }) => data.home === true);
 
 const menu = [
-	{ name: "Diccionario", href: "/" },
+	{ name: "Diccionario", href: "/diccionario" },
 	{ name: "Guías", href: "/guias", submenu: guias.map(item => ({
 			name: item.data.title,
 			href: `/guias/${item.slug}`,
@@ -24,6 +24,7 @@ const menu = [
 			caption: item.data.caption || '',
 		})) },
 	{ name: "Experiencias VR", href: "/experiencias" },
+	{ name: "FAQ", href: "/faq" },
 ];
 ---
 

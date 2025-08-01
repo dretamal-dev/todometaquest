@@ -63,8 +63,6 @@ function Filter({target}) {
             return acc;
         }, { search: [] });
 
-        console.log('getDataDomByPrefix', groupedByType);
-
         return groupedByType;
     }
 
@@ -187,6 +185,7 @@ function Filter({target}) {
       <>
         {dataDom && 
           <form
+            onSubmit={e => e.preventDefault()}
             onChange={(e) => {
               // Solo llamar formularioModificado si no es checkbox
               if (e.target.type !== "checkbox") {
@@ -194,28 +193,53 @@ function Filter({target}) {
               }
             }}
           >
-            {dataDom.search && dataDom.search.length > 0 && (
-              <div className="shadow-2xl flex items-center bg-gray-900/80 p-4 rounded-md max-w-xl mx-auto mb-6">
-                <span className="text-pink-700">&gt;</span>
-                <input
-                  className=" text-white p-0.5 outline-none ml-2 w-full"
-                  name="search"
-                  type="text"
-                  placeholder="Buscar..."
-                />
-              </div>
-            )}
-            
-            {dataDom.select &&
-              Object.entries(dataDom.select).map(([group, options], idx) => (
-                <select key={group} name={`select-${group}`} defaultValue="">
-                  <option value="">Selecciona...</option>
-                  {options.map((option, i) => (
-                    <option key={i} value={option}>{option}</option>
-                  ))}
-                </select>
-              ))
-            }
+            <div className='flex items-top justify-center mb-6 gap-2 max-w-xl mx-auto gap-2'>
+                {dataDom.search && dataDom.search.length > 0 && (
+                    <div className="shadow-2xl flex items-center bg-gray-900/80 p-4 rounded-md w-full mx-auto">
+                        <span className="text-pink-700 text-lg">&gt;</span>
+                        <input
+                        className=" text-white p-0.5 outline-none ml-2 w-full"
+                        name="search"
+                        type="text"
+                        placeholder="Buscar..."
+                        />
+                    </div>
+                )}
+                <button
+                  type="button"
+                  className="active:bg-gray-800 font-mono text-xs cursor-pointer bg-gray-900/80 p-2 rounded-md max-h-8 text-gray-200/10 border-1 border-gray-200/10 transition-all duration-200 hover:border-gray-200 hover:text-gray-200"
+                  onClick={(e) => {
+                    setFilter({});
+                    setCheckedState({});
+                    const form = e.currentTarget.closest('form');
+                    if (form) form.reset();
+                  }}
+                >
+                  Reset
+                </button>
+            </div>
+
+            <div className='flex items-center justify-center mb-6 gap-2'>
+                {dataDom.select &&
+                Object.entries(dataDom.select).map(([group, options], idx) => {
+                  const selectedValue = filter?.[`select-${group}`] || "";
+                  const isSelected = selectedValue !== "";
+                  return (
+                    <select
+                      key={group}
+                      name={`select-${group}`}
+                      defaultValue=""
+                      className={`px-4 py-2 rounded-md bg-gray-900/80 text-white focus:outline-none focus:ring-2 focus:ring-pink-700 transition-colors duration-200 shadow-md ${isSelected ? 'border-1 border-pink-700' : ''}`}
+                    >
+                      <option value="">Selecciona...</option>
+                      {options.map((option, i) => (
+                        <option className='after:content-[""] after:w-[200px] after:h-[30px] after:bg-red-300' key={i} value={option}>{option}</option>
+                      ))}
+                    </select>
+                  );
+                })
+                }
+            </div>
 
             {dataDom.check &&
               Object.entries(dataDom.check).map(([group, options]) => (

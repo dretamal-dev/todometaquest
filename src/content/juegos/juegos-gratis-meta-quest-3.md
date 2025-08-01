@@ -5,5 +5,6 @@ img: /images/guias/arreglar.jpg
 readtime: 224
 description: Juega sin gastar nada con esta lista de los mejores juegos gratuitos para Meta Quest 3.
 home: true
+date: 2024-01-31
 ---
 Esto es una prueba del contenido de un MD **mira como mola**.

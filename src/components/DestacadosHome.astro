@@ -73,7 +73,9 @@ items = items.map(item => item.data).slice(0, 5);
     const buttons = document.querySelectorAll('[data-idx]');
 
     const item = items[idx];
-    main.style.backgroundImage = `url(${item.img})`;
+    if (main){
+      main.style.backgroundImage = `url(${item.img})`;
+    }
     category.textContent = item.category || 'Sin categoría';
     title.textContent = item.title;
     desc.textContent = item.description;
