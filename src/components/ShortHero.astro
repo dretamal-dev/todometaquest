@@ -1,11 +1,9 @@
 ---
 const { title, description, image , bgposition = 'center' } = Astro.props;
-
-
 ---
 <header class="relative h-[80vh] flex flex-col items-center justify-center text-center bg-gradient-to-b from-zinc-900 to-slate-800">
   <div 
-    class={`bg-${bgposition} absolute w-full h-full object-cover z-0 mask-b-from-20% mask-b-to-90% bg-cover bg-center opacity-90`}
+    class={`bg-${bgposition} absolute w-full h-full object-cover z-0 mask-b-from-20% bg-cover`}
     style={`background-image: url('${image}');`}
   ></div>
   <div class="z-10 w-9/12 ">

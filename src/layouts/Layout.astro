@@ -1,7 +1,7 @@
 ---
 	import "../styles/global.css";
 	import { ClientRouter } from "astro:transitions";
-
+	const Year = new Date().getFullYear();
 ---
 <!doctype html>
 <html lang="en" class="dark">
@@ -18,8 +18,8 @@
 
 
 
-		<footer class="w-full bg-slate-900 text-center py-4 mt-auto">
-			<p class="text-sm text-gray-400">© 2024 Tu Sitio. Todos los derechos reservados.</p>
+		<footer class="w-full bg-gradient-to-r from-slate-900 to-slate-600 text-center py-4 mt-auto">
+			<p class="text-sm text-gray-400">© {Year} VRQ.com Todos los derechos reservados.</p>
 		</footer>
 
 		

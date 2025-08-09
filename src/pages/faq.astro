@@ -7,298 +7,88 @@ import Filter from '../components/React/Filter.jsx';
 
 import { getOptimizedImage } from '/src/utils/imageUtils.js';
 
-const terminos = [
+const faq = [
   {
-    "term": "VR",
-    "description": "Realidad virtual: tecnología que simula entornos tridimensionales inmersivos mediante un visor."
+    "question": "¿Qué es Meta Quest 3?",
+    "answer": "Meta Quest 3 es un visor de realidad virtual y mixta desarrollado por Meta. Es un dispositivo autónomo que no requiere cables ni PC para funcionar, e incluye mejoras significativas respecto a modelos anteriores como el passthrough en color, mejor resolución y un chip más potente."
   },
   {
-    "term": "AR",
-    "description": "Realidad aumentada: superpone elementos virtuales sobre el mundo real."
+    "question": "¿Cuál es la diferencia entre Meta Quest 2 y Meta Quest 3?",
+    "answer": "Meta Quest 3 tiene mayor resolución, un procesador Snapdragon XR2 Gen 2 más potente, passthrough en color para realidad mixta, mejores lentes tipo pancake, y mandos rediseñados. Además, es más cómodo y ofrece mejor rendimiento general."
   },
   {
-    "term": "MR",
-    "description": "Realidad mixta: fusión avanzada entre realidad virtual y aumentada, con interacción bidireccional."
+    "question": "¿Puedo usar mis juegos de Quest 2 en Quest 3?",
+    "answer": "Sí, Meta Quest 3 es totalmente compatible con la biblioteca de juegos de Quest 2. Puedes continuar usando tus compras anteriores sin problemas."
   },
   {
-    "term": "Passthrough",
-    "description": "Vista en tiempo real del entorno real a través de las cámaras del visor."
+    "question": "¿Qué juegos aprovechan mejor las capacidades de Meta Quest 3?",
+    "answer": "Algunos juegos optimizados para Quest 3 incluyen Asgard's Wrath 2, Red Matter 2, First Encounters y títulos de realidad mixta como Puzzling Places MR. También se están actualizando muchos juegos para aprovechar la nueva potencia gráfica."
   },
   {
-    "term": "PCVR",
-    "description": "Realidad virtual que depende de un ordenador para funcionar, como con SteamVR o Oculus Link."
+    "question": "¿Puedo jugar a juegos de PC en Meta Quest 3?",
+    "answer": "Sí. Puedes conectar tu visor a un PC compatible mediante un cable USB-C (Oculus Link) o de forma inalámbrica usando Air Link o Virtual Desktop. Esto permite jugar a títulos de SteamVR o Rift."
   },
   {
-    "term": "Standalone VR",
-    "description": "Visores que no necesitan PC ni cables, como Meta Quest 3."
+    "question": "¿Qué accesorios son recomendables para Meta Quest 3?",
+    "answer": "Algunos accesorios útiles son: correa Elite o BoboVR, batería externa, fundas de silicona, lentes graduadas personalizadas, estuche de transporte, base de carga y cubiertas antideslizantes para los mandos."
   },
   {
-    "term": "Foveated Rendering",
-    "description": "Técnica que mejora el rendimiento renderizando en alta calidad solo donde se enfoca la vista."
+    "question": "¿Puedo usar gafas dentro del visor?",
+    "answer": "Sí, pero puede resultar incómodo. Se recomienda utilizar lentes graduadas insertables específicas para Quest 3, que mejoran la experiencia visual y la comodidad."
   },
   {
-    "term": "Hand Tracking",
-    "description": "Tecnología que permite usar las manos directamente como controladores en VR, sin mandos."
+    "question": "¿Qué resolución tiene Meta Quest 3?",
+    "answer": "El visor tiene una resolución de 2064 x 2208 píxeles por ojo, una de las más altas entre visores standalone disponibles actualmente."
   },
   {
-    "term": "6DOF",
-    "description": "Seis grados de libertad: permite movimiento libre en 3D (rotación y desplazamiento)."
+    "question": "¿Cuánto dura la batería de Meta Quest 3?",
+    "answer": "La batería dura entre 2 y 3 horas, dependiendo del uso. Puede extenderse con una batería externa o con una correa con batería integrada como la Elite Battery Strap."
   },
   {
-    "term": "3DOF",
-    "description": "Tres grados de libertad: solo permite rotar la cabeza, sin moverse en el espacio."
+    "question": "¿Qué requisitos debe tener mi PC para usar PCVR con Quest 3?",
+    "answer": "Tu PC debe tener una GPU compatible (como una NVIDIA GTX 1660 o superior), al menos 8 GB de RAM, un puerto USB 3.0, y una red Wi-Fi 5 o 6 para conexiones inalámbricas estables."
   },
   {
-    "term": "Guardian",
-    "description": "Sistema de límites virtuales que evita que el usuario salga del área segura de juego."
+    "question": "¿Dónde comprar Meta Quest 3?",
+    "answer": "Se puede comprar en tiendas oficiales como Meta.com, Amazon, MediaMarkt o Fnac. También existen programas de referidos que permiten obtener crédito en la tienda por cada compra."
   },
   {
-    "term": "Inside-out Tracking",
-    "description": "Seguimiento espacial que se realiza desde las cámaras del visor sin sensores externos."
+    "question": "¿Meta Quest 3 necesita cuenta de Facebook?",
+    "answer": "No. Desde Meta Quest 2, se pueden usar cuentas de Meta independientes sin necesidad de vincular una cuenta de Facebook."
   },
   {
-    "term": "Outside-in Tracking",
-    "description": "Seguimiento que depende de sensores externos para rastrear el movimiento del visor y mandos."
+    "question": "¿Qué garantía tiene el visor?",
+    "answer": "Meta Quest 3 tiene una garantía de 2 años en la Unión Europea. Además, Meta ofrece un plan de protección opcional llamado Meta Quest Protection Plan, que cubre daños accidentales."
   },
   {
-    "term": "Oculus Link",
-    "description": "Sistema que permite conectar Quest a un PC mediante cable para jugar a juegos de PCVR."
+    "question": "¿Puedo ver películas como si estuviera en un cine con Meta Quest 3?",
+    "answer": "Sí. Existen apps como Bigscreen VR, Skybox o incluso YouTube VR que permiten ver contenido 2D y 3D en entornos virtuales como cines, salas privadas o escenarios inmersivos."
   },
   {
-    "term": "Air Link",
-    "description": "Versión inalámbrica de Oculus Link que permite transmitir juegos de PC al visor vía Wi-Fi."
+    "question": "¿Se puede usar Meta Quest 3 sentado?",
+    "answer": "Sí. Puedes jugar de pie, sentado o en espacios más grandes si habilitas el seguimiento a escala de habitación. El visor se adapta automáticamente según el juego y el entorno configurado."
   },
   {
-    "term": "Streaming VR",
-    "description": "Reproducción de contenido VR desde otro dispositivo al visor, ya sea vídeo o juegos."
+    "question": "¿Funciona Meta Quest 3 para niños?",
+    "answer": "Meta recomienda su uso a partir de los 10 años. No está diseñado para niños pequeños, ya que sus ojos aún están en desarrollo y el contenido puede no ser apropiado."
   },
   {
-    "term": "Refresh Rate",
-    "description": "Frecuencia de actualización de imagen, medida en Hz. Afecta a la fluidez de la experiencia."
+    "question": "¿Puedo usar Meta Quest 3 con Steam?",
+    "answer": "Sí. Puedes jugar a títulos de SteamVR conectando tu visor al PC mediante Oculus Link o Virtual Desktop, siempre que tu PC cumpla con los requisitos mínimos."
   },
   {
-    "term": "IPD",
-    "description": "Interpupillary Distance: distancia entre pupilas, ajustable para mejorar claridad y comodidad."
+    "question": "¿Puedo usar aplicaciones como Netflix o YouTube en Quest 3?",
+    "answer": "Sí. Puedes instalar apps como YouTube VR, Netflix o Amazon Prime Video desde la tienda de Meta. También puedes ver vídeos locales usando apps como Skybox VR."
   },
   {
-    "term": "Haptics",
-    "description": "Retroalimentación táctil en mandos o visores para simular sensación de contacto o vibración."
+    "question": "¿Meta Quest 3 sirve para hacer ejercicio?",
+    "answer": "Sí. Existen juegos y apps como Supernatural, FitXR o Beat Saber que están diseñados para entrenamiento físico y cardio, y aprovechan el seguimiento del cuerpo para registrar el ejercicio."
   },
   {
-    "term": "Roomscale",
-    "description": "Experiencia VR que requiere moverse físicamente por una habitación o espacio amplio."
-  },
-  {
-    "term": "Seated VR",
-    "description": "Modalidad de VR pensada para jugar sentado, ideal para espacios reducidos."
-  },
-  {
-    "term": "Meta Quest Store",
-    "description": "Tienda oficial de aplicaciones y juegos para visores Meta Quest."
-  },
-  {
-    "term": "SideQuest",
-    "description": "Plataforma alternativa para instalar apps y juegos no oficiales en dispositivos Quest."
-  },
-  {
-    "term": "App Lab",
-    "description": "Sistema de distribución oficial de Meta para apps en desarrollo o fuera de la tienda principal."
-  },
-  {
-    "term": "Beat Saber",
-    "description": "Juego musical emblemático de VR donde cortas bloques al ritmo de la música con sables de luz."
-  },
-  {
-    "term": "SteamVR",
-    "description": "Plataforma de Valve para realidad virtual en PC, compatible con múltiples visores."
-  },
-  {
-    "term": "Virtual Desktop",
-    "description": "Aplicación que permite acceder al escritorio de tu PC desde el visor VR e incluso jugar en streaming."
-  },
-  {
-    "term": "Tracking",
-    "description": "Capacidad del sistema VR para seguir los movimientos del usuario en tiempo real."
-  },
-  {
-    "term": "Latency",
-    "description": "Tiempo que tarda una acción física en reflejarse en el visor. Menor latencia = mejor experiencia."
-  },
-  {
-    "term": "Field of View (FOV)",
-    "description": "Campo de visión visible dentro del visor. Más FOV = mayor inmersión."
-  },
-  {
-    "term": "Meta Quest+",
-    "description": "Servicio de suscripción de Meta que ofrece juegos mensuales para los usuarios de Quest."
-  },
-  {
-    "term": "Mixed Reality Apps",
-    "description": "Aplicaciones que combinan elementos reales y virtuales mediante passthrough y realidad mixta."
-  },
-  {
-    "term": "Virtual Theater",
-    "description": "Aplicación o modo que simula una sala de cine para ver películas en VR."
-  },
-  {
-    "term": "Motion Sickness",
-    "description": "Mareo o malestar que pueden experimentar algunos usuarios por desincronización visual y física."
-  },
-  {
-    "term": "Controller Drift",
-    "description": "Problema donde los mandos envían señales erróneas de movimiento sin tocarlos."
-  },
-  {
-    "term": "Rendering",
-    "description": "Proceso de generación de imágenes en 3D en tiempo real por la GPU del visor o el PC."
-  },
-  {
-    "term": "Tracking Loss",
-    "description": "Situación en la que el visor o mandos dejan de ser rastreados correctamente por un momento."
-  },
-  {
-    "term": "Play Area",
-    "description": "Espacio delimitado y seguro para moverse al usar un visor VR con roomscale."
-  },
-  {
-    "term": "Meta Horizon Home",
-    "description": "Entorno virtual base en el visor Quest donde puedes moverte, socializar y lanzar apps."
-  },
-  {
-    "term": "Guardian Reset",
-    "description": "Reconfiguración del límite de juego virtual cuando se cambia de habitación o zona."
-  },
-  {
-    "term": "Content Sideloading",
-    "description": "Instalación de contenido no oficial o no aprobado por Meta en el visor Quest."
-  },
-  {
-    "term": "Frame Rate",
-    "description": "Número de imágenes por segundo que genera el visor o el PC. Afecta a la fluidez y comodidad."
-  },
-  {
-    "term": "Touch Controllers",
-    "description": "Mandos diseñados para Meta Quest que detectan posición y gestos de la mano."
-  },
-  {
-    "term": "Passthrough Color",
-    "description": "Vista del mundo real a color a través de cámaras, disponible en Quest 3 y superiores."
-  },
-  {
-    "term": "XR",
-    "description": "Extended Reality: término general que engloba VR, AR y MR."
-  },
-  {
-    "term": "Pico",
-    "description": "Competidor de Meta Quest fabricado por ByteDance, con visores como Pico 4."
-  },
-  {
-    "term": "Guardian Boundaries",
-    "description": "Líneas virtuales que aparecen cuando te acercas al límite del área segura."
-  },
-  {
-    "term": "Meta Horizon Worlds",
-    "description": "Plataforma social de Meta donde los usuarios crean y exploran mundos virtuales."
-  },
-  {
-    "term": "Voice Commands",
-    "description": "Comandos por voz para controlar el visor o realizar acciones sin usar las manos."
-  },
-	{
-    "term": "Headstrap",
-    "description": "Cinta de sujeción del visor. Las versiones mejoradas ofrecen más confort y equilibrio."
-  },
-  {
-    "term": "VRChat",
-    "description": "Plataforma social en VR para crear avatares, mundos y socializar con otras personas."
-  },
-	{
-    "term": "Avatar VR",
-    "description": "Representación virtual de un usuario dentro del mundo VR."
-  },
-	{
-    "term": "Developer Mode",
-    "description": "Modo que permite instalar apps externas, hacer sideloading o desarrollar para Quest."
-  },
-  {
-    "term": "Unity VR",
-    "description": "Motor gráfico usado para desarrollar muchas experiencias VR compatibles con Quest."
-  },
-	{
-    "term": "Sideloading",
-    "description": "Instalación manual de aplicaciones fuera de la tienda oficial."
-  },
-	{
-    "term": "Charging Dock",
-    "description": "Estación de carga para visores y mandos, ideal para mantener todo listo y organizado."
-  },
-	{
-    "term": "Link Cable",
-    "description": "Cable USB-C de alta velocidad usado para conectar Quest a PC y jugar en modo PCVR."
-  },
-	{
-    "term": "Horizon Workrooms",
-    "description": "Espacio virtual de reuniones y trabajo colaborativo de Meta."
-  },
-	{
-    "term": "360 Video",
-    "description": "Vídeo grabado en todas direcciones, visible en VR como si estuvieras dentro de la escena."
-  },
-  {
-    "term": "PSVR2",
-    "description": "Segunda generación del visor de realidad virtual de PlayStation, compatible con PS5 y con mejoras como seguimiento ocular, gatillos adaptativos y vibración háptica integrada."
-  },
-  {
-    "term": "Pimax Crystal Super",
-    "description": "Visor VR de gama alta de Pimax con lentes intercambiables, resolución 4K por ojo y enfoque en simuladores y juegos exigentes para PCVR."
-  },
-  {
-    "term": "Lentes graduadas",
-    "description": "Accesorios ópticos personalizados para visores VR que corrigen problemas de visión sin necesidad de usar gafas dentro del visor."
-  },
-  {
-    "term": "Game Quest Optimizer (GQO)",
-    "description": "Aplicación para Meta Quest que permite optimizar el rendimiento y la calidad gráfica de juegos mediante ajustes personalizados por título."
-  },
-  {
-    "term": "Referidos Meta Quest",
-    "description": "Sistema de recompensas de Meta donde usuarios pueden invitar a otros con enlaces y ambos reciben crédito en la tienda al comprar un visor o aplicación."
-  },
-  {
-    "term": "Play for Dream",
-    "description": "Empresa emergente centrada en hardware de realidad virtual, conocida por desarrollar visores ligeros con pantallas micro-OLED y enfoque en portabilidad."
-  },
-  {
-    "term": "WMR (Windows Mixed Reality)",
-    "description": "Plataforma de Microsoft para realidad mixta, compatible con una gama de visores VR como los de HP, Acer o Samsung, principalmente para PC."
-  },
-  {
-    "term": "Bigscreen Beyond",
-    "description": "Visor ultraligero de VR para PC con tamaño personalizado, desarrollado por Bigscreen, ideal para contenido multimedia y experiencias inmersivas."
-  },
-  {
-    "term": "Oculus Rift",
-    "description": "Primer visor de realidad virtual de Oculus para PC, que popularizó la VR moderna en 2016 antes de evolucionar hacia Meta Quest."
-  },
-  {
-    "term": "Oculus Go",
-    "description": "Visor VR standalone lanzado en 2018, centrado en consumo de contenido multimedia, sin seguimiento posicional completo."
-  },
-  {
-    "term": "XREAL Air",
-    "description": "Gafas de realidad aumentada ligeras y portátiles que proyectan una pantalla gigante virtual frente al usuario, ideales para entretenimiento."
-  },
-  {
-    "term": "Apple Vision Pro",
-    "description": "Visor de realidad mixta de Apple con enfoque premium, integración con el ecosistema de iOS y control por ojos, manos y voz."
-  },
-  {
-    "term": "Valve Index",
-    "description": "Visor de realidad virtual para PC de alto rendimiento desarrollado por Valve, con mandos avanzados y pantalla de alta frecuencia de refresco."
+    "question": "¿Puedo piratear juegos en Meta Quest 3?",
+    "answer": "El pirateo de software es ilegal y va contra los términos de uso de Meta. Aunque hay usuarios que exploran el sideloading de APKs, siempre existe riesgo de suspensión de cuenta y otros problemas legales."
   }
 ];
-
-terminos.sort((a, b) => a.term.localeCompare(b.term));
 
 ---
 
@@ -309,28 +99,51 @@ terminos.sort((a, b) => a.term.localeCompare(b.term));
 	<ShortHero 
 		title="FAQ - Preguntas Frecuentes sobre Meta Quest 3" 
 		description="Encuentra respuestas a las preguntas más comunes sobre Meta Quest 3, desde términos técnicos hasta guías de uso y recomendaciones."
-		image={getOptimizedImage('/images/general/faq-preguntas-frecuentes-meta-quest-3.webp', false)}
-		bgposition="bottom"
+		image={getOptimizedImage('/images/general/faq-preguntas-frecuentes-de-meta-quest-3.webp', false)}
+		bgposition="center"
 	>
 		<div class="z-2 absolute bottom-0 mb-4">
 			<Filter target=".js-filter-box" client:load/>
 		</div>
 	</ShortHero> 
 
-  <section aria-label="Listado de términos" class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
-    <ul class="js-filter-box divide-y divide-gray-700">
-      {terminos.map(termino => (				
-        <li id={termino.term.toLowerCase().replace(/\s+/g, '-')} class="p-4 mb-2 rounded-t-md hover:bg-slate-900 hover:scale-105 transition-all duration-200" data-jsfilter-search={termino.term} >
-            <article itemscope itemtype="https://schema.org/DefinedTerm">
-                <h2 itemprop="name" class="text-2xl font-semibold text-gray-200">{termino.term}</h2>
-                <p itemprop="description" class="text-gray-300 mt-1">
-                {termino.description}
-                </p>
-            </article>
-        </li>
-				))}        
-      
-    </ul>
+  <section aria-label="Listado de términos" class="my-4 mb-20 w-8/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
+
+    <div class="w-full flex flex-col gap-2 js-filter-box" itemscope itemtype="https://schema.org/FAQPage">
+      {faq.map((faq, index) => (
+        <details 
+          data-jsfilter-search={faq.question} itemscope itemprop="mainEntity" itemtype="https://schema.org/Question" 
+          class="group rounded-lg bg-gray-900/80  [&[open]]:bg-gray-950/80 [&[open]]:scale-105 transition-all"
+        >
+          <summary class="cursor-pointer select-none px-4 py-3 flex justify-between items-center text-white">
+            <h2 itemprop="name">{faq.question}</h2>
+            <svg
+              class="w-5 h-5 text-pink-700 transition-transform duration-300 group-open:rotate-180"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-4 pb-4 pt-2 text-gray-300" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+              {faq.answer}
+            </p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+
+
+
+
+
+
+    
   </section>
 
 </Layout>

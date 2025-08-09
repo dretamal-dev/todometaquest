@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ShortHero from '../components/ShortHero.astro';
+import Header from '../components/Header.astro';
+import Experiencia from '../components/Experiencia.astro';
+import Antihero from '../components/Antihero.astro';
+
+import { getOptimizedImage } from '/src/utils/imageUtils.js';
+
+import { getCollection, render } from 'astro:content';
+const experiencias = await getCollection('experiencias');
+
+
+---
+
+<Layout>
+	
+	<Header />
+	<ShortHero title="Experiencias VR para explotar tus Meta Quest 3" description="Explora guías, juegos y accesorios para disfrutar al máximo tu experiencia de realidad virtual" image={getOptimizedImage('/images/experiencias/experiencias-vr-explotar-tus-meta-quest-3.webp', false)} bgposition="bottom"></ShortHero> 
+
+	<section aria-label="Guías para Meta Quest 3" class="my-4 mb-20 w-full mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
+		{experiencias.map((experiencia, index) => (
+			<Experiencia experiencia={experiencia} num={index + 1} />
+		))}
+	</section>	
+	<Antihero />
+
+</Layout>
+

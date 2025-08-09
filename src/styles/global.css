@@ -28,5 +28,15 @@
       text-shadow: none !important;
     }
   }
+
+  --animate-pulso-glow: pulso-glow 5.5s infinite;
+  @keyframes pulso-glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 14px #ff009579);
+    }
+    50% {
+      filter: drop-shadow(0 0 24px #ff0095);
+    }
+  }
 }
 

@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ShortHero from '../../components/ShortHero.astro';
+import Header from '../../components/Header.astro';
+import Gallery from '../../components/Gallery.astro';
+import { getOptimizedImage } from '../../utils/imageUtils.js';
+
+export async function getStaticPaths() {
+  const guias = await getCollection('guias');
+  return guias.map(guia => ({
+    params: { slug: guia.slug },
+    props: { guia }
+  }));
+}
+
+const { guia } = Astro.props;
+const { data } = guia; 
+const { title, date, img, readtime, description, tags, related_images} = data;
+
+const { Content } = await render(guia);
+
+
+
+
+---
+<Layout title={title} description={data.description}>
+
+
+  <Header />
+
+	<ShortHero 
+		title={title} 
+		description={description} 
+		image={getOptimizedImage(img, false)}
+		bgposition="center"
+	>
+		<div class="z-2 absolute bottom-0 mb-4">
+      xxxxxxxx
+    </div>
+	</ShortHero> 
+
+  <div class="flex gap-4 w-9/12 m-auto">
+    <section class="my-4 mb-20 w-9/12 mx-auto m-auto block justify-center transition-transform duration-300">
+      <Content />
+    </section>
+    <section class="my-4 w-3/12">
+      <Gallery images={related_images} />
+    </section>
+
+  </div>
+
+  
+</Layout> 

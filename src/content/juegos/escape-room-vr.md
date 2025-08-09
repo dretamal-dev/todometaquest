@@ -6,6 +6,6 @@ readtime: 224
 description: Si te gustan los desafíos mentales, estos escape rooms en VR te engancharán.
 home: true
 date: 2024-01-31
-tags: ['Escape room']
+tags: ['Escape Room']
 ---
 Esto es una prueba del contenido de un MD **mira como mola**.

@@ -1,0 +1,41 @@
+---
+import { astroCalledServerError } from 'astro:actions';
+import CarruselYoutube from './React/CarruselYoutube.jsx';
+import { getCollection, render } from 'astro:content';
+import { getOptimizedImage } from '/src/utils/imageUtils.js';
+
+const { experiencia, num } = Astro.props;
+const {Content} = await render(experiencia);
+---
+
+
+
+
+ 
+ <!-- <div class="w-full" style="filter: drop-shadow(0 0 24px #ff009579);" -->
+<div class="w-full relative">
+  <div class={`
+  relative flex min-h-[400px] w-full bg-cover bg-center text-white ${num % 2 === 0 ? 'flex-row-reverse' : ''}
+  p-12 pt-24 pb-24 group
+  [clip-path:polygon(0_60px,50%_120px,100%_60px,100%_calc(100%-60px),50%_100%,0_calc(100%-60px))]
+  `}
+  style={`background-image: url('${getOptimizedImage(experiencia.data.img, false)}');`}>
+
+    
+    <div class={`w-9/12 my-14 z-2 ${num % 2 === 0 ? 'flex flex-col items-end' : ''}`}>
+      <div class={`font-[fantasy] text-[200px] ${num % 2 === 0 ? 'text-end' : ''} leading-none group-hover:animate-glitch`}>{num}<span class="text-7xl">.</span></span></div>
+      <h1 class={`text-7xl font-bold mb-6 group-hover:animate-glitch ${num % 2 === 0 ? 'text-end' : ''}`}>{experiencia.data.title}</h1>
+      <div class="text-md w-9/12 text-pretty">
+        <Content />
+      </div>
+      <!-- <CarruselYoutube client:load /> -->
+    </div>
+    <div class={`absolute top-0 left-0 bg-purple-900 w-full h-full object-cover z-0 ${num % 2 === 0 ? 'mask-l-from-20% mask-l-to-90%' : 'mask-r-from-20% mask-r-to-90%'} transition-all duration-500 opacity-40 group-hover:opacity-95 group-hover:bg-purple-950`}></div>
+  </div>
+  <div class={`${num % 2 === 0 ? 'left-0' : 'right-0'}  mx-6 mb-6 absolute w-auto text-center bottom-0 text-2xl z-3`}>
+    <CarruselYoutube ids={experiencia.data.videos} client:load />
+  </div>
+</div>
+
+
+

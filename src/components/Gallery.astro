@@ -1,0 +1,85 @@
+---
+import { getOptimizedImage } from '../utils/imageUtils.js';
+const { images } = Astro.props;
+const randomId = Math.random().toString(36).substring(2, 15);
+---
+
+  
+{images && images.length > 0 && (
+  <div id={`js-open-gallery-${randomId}`} class="opacity-80 group hover:contrast-125 flex items-center justify-center cursor-pointer rounded-xl shadow-2xl aspect-16/9 bg-cover bg-center" style={`background-image: url(${getOptimizedImage(images[0], 400)});`}>
+    <div class="group-hover:scale-150 flex flex-row transition-all duration-200">
+      <svg class="max-w-[30px] w-full inline-block fill-white me-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C14.7614 18 17 15.7614 17 13C17 10.2386 14.7614 8 12 8C9.23858 8 7 10.2386 7 13C7 15.7614 9.23858 18 12 18ZM12 16.0071C10.3392 16.0071 8.9929 14.6608 8.9929 13C8.9929 11.3392 10.3392 9.9929 12 9.9929C13.6608 9.9929 15.0071 11.3392 15.0071 13C15.0071 14.6608 13.6608 16.0071 12 16.0071Z"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M9.56155 2C8.18495 2 6.985 2.93689 6.65112 4.27239L6.21922 6H4C2.34315 6 1 7.34315 1 9V19C1 20.6569 2.34315 22 4 22H20C21.6569 22 23 20.6569 23 19V9C23 7.34315 21.6569 6 20 6H17.7808L17.3489 4.27239C17.015 2.93689 15.8151 2 14.4384 2H9.56155ZM8.59141 4.75746C8.7027 4.3123 9.10268 4 9.56155 4H14.4384C14.8973 4 15.2973 4.3123 15.4086 4.75746L15.8405 6.48507C16.0631 7.37541 16.863 8 17.7808 8H20C20.5523 8 21 8.44772 21 9V19C21 19.5523 20.5523 20 20 20H4C3.44772 20 3 19.5523 3 19V9C3 8.44772 3.44772 8 4 8H6.21922C7.13696 8 7.93692 7.37541 8.15951 6.48507L8.59141 4.75746Z"></path> </g></svg>
+      <span class="text-2xl inline-block">Galería</span>
+    </div>
+  </div>
+)}
+
+
+{images && images.length > 0 && (
+  <>
+    <div data-total={images.length} data-index="0" class="hidden fixed top-0 left-0 w-full h-full bg-black/80 z-9999" id={`js-gallery-modal-${randomId}`}>
+      <div class="w-full h-full bg-contain bg-no-repeat bg-center js-modal-image"></div>
+      <div class="absolute top-4 right-4 cursor-pointer text-white text-3xl font-bold z-10" id={`js-close-gallery-${randomId}`}>
+        &times;
+      </div>
+      <div class="absolute px-4 py-3 rounded-full flex align-middle justify-center left-4 top-1/2 transform -translate-y-1/2 cursor-pointer transition-all duration-200 text-white hover:text-black text-4xl font-bold z-10 opacity-20 hover:opacity-100 hover:bg-slate-300" id={`js-gallery-prev-${randomId}`}>&#8592;</div>
+      <div class="absolute px-4 py-3 rounded-full flex align-middle justify-center right-4 top-1/2 transform -translate-y-1/2 cursor-pointer transition-all duration-200 text-white hover:text-black text-4xl font-bold z-10 opacity-20 hover:opacity-100 hover:bg-slate-300" id={`js-gallery-next-${randomId}`}>&#8594;</div>
+    </div>
+    
+    <script define:vars={{ images, randomId }} is:inline>
+
+      const galleryModal = document.querySelector(`#js-gallery-modal-${randomId}`);
+
+      document.querySelector(`#js-close-gallery-${randomId}`)?.addEventListener('click',(e) => closeGallery(e));
+      document.querySelector(`#js-open-gallery-${randomId}`)?.addEventListener('click',(e) => openGallery(e));
+      document.querySelector(`#js-gallery-prev-${randomId}`)?.addEventListener('click',(e) => prevGallery(e));
+      document.querySelector(`#js-gallery-next-${randomId}`)?.addEventListener('click',(e) => nextGallery(e));
+
+
+      function prevGallery(e) {
+        let index = parseInt(galleryModal.dataset.index, 10);
+        if (index === 0) {
+          galleryModal.dataset.index = images.length - 1;
+          setImageToModal();
+          return;
+        }
+        if (index > 0) {
+          galleryModal.dataset.index = parseInt(index, 10) - 1;
+          setImageToModal();
+        }
+      }
+
+      function nextGallery(e) {
+        const index = galleryModal.dataset.index;
+        if (index >= images.length - 1) {
+          galleryModal.dataset.index = 0;
+          setImageToModal();
+          return;
+        }
+        if (index < images.length - 1) {
+          galleryModal.dataset.index = parseInt(index, 10) + 1;
+          setImageToModal();
+        }
+      }
+
+      function closeGallery(e) {
+        galleryModal.classList.add('hidden');
+      }
+      function openGallery(e) {
+        galleryModal.classList.remove('hidden');
+        setImageToModal();
+      }
+
+      function setImageToModal(){
+        const index = galleryModal.dataset.index;
+        galleryModal.querySelector('.js-modal-image').style.backgroundImage = `url(${images[index]})`;
+      }
+    </script>
+  </>
+)}
+
+
+
+
+
+
