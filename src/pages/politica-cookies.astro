@@ -6,8 +6,14 @@ import { getOptimizedImage } from '/src/utils/imageUtils.js';
 
 
 const currentDomain = Astro.url.hostname; 
+const seoObj = {
+  title : 'Política de Cookies',
+  description: 'Política de Cookies',
+  image: '/images/general/cookies-meta-quest-3.webp',
+  robots: 'noindex, nofollow'
+}
 ---
-<Layout>
+<Layout seoObj={seoObj}>
 	
 	<Header />
 

@@ -67,7 +67,7 @@
     @apply list-decimal ps-10 mb-6
   }
   img{
-    @apply rounded-2xl max-h-[400px] my-4
+    @apply rounded-2xl max-h-[400px] my-4 hover:scale-105 transition-transform duration-150 cursor-pointer hover:rotate-1
   }
 }
 

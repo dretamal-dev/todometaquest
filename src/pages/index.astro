@@ -15,16 +15,24 @@ const juegos = await getCollection('juegos', ({ data }) => data.home === true);
 const accesorios = await getCollection('accesorios', ({ data }) => data.home === true);
 // const guias = await getCollection('guias');
 
+const titulo = 'xxxxxxxxxx';
+const desc = 'xxxxxxxxxxx';
+const seoObj = {
+  title : titulo,
+  description: desc,
+  image: '/images/general/hero_bckg_1.webp',
+}
+
 ---
 
-<Layout>
+<Layout seoObj={seoObj}>
 	
 	<Header />
 	<Hero />
 
 	<main class="my-4 w-9/12 mx-auto m-auto">
 		<DestacadosHome items={guias}/>
-		<SectionCards items={juegos} />
+		<SectionCards items={juegos} prefix="/juegos/"/>
 		<AccesoriosHome items={accesorios} />
 	</main>	
 

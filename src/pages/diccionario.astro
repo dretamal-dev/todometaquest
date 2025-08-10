@@ -7,6 +7,14 @@ import Filter from '../components/React/Filter.jsx';
 
 import { getOptimizedImage } from '/src/utils/imageUtils.js';
 
+const titulo = 'Diccionario de términos sobre Realidad Virtual';
+const desc = 'Explora nuestro diccionario de términos sobre Realidad Virtual y conoce los conceptos clave para entender esta tecnología innovadora.';
+const seoObj = {
+  title : titulo,
+  description: desc,
+  image: '/images/general/diccionario-terminos-meta-quest-3-realidad-virtual.webp',
+}
+
 const terminos = [
   {
     "term": "VR",
@@ -302,13 +310,13 @@ terminos.sort((a, b) => a.term.localeCompare(b.term));
 
 ---
 
-<Layout>
-	
+<Layout seoObj={seoObj}>
+
 	<Header />
 
 	<ShortHero 
-		title="Diccionario de términos sobre Realidad Virtual" 
-		description="Explora nuestro diccionario de términos sobre Realidad Virtual y conoce los conceptos clave para entender esta tecnología innovadora."
+		title={titulo} 
+		description={desc}
 		image={getOptimizedImage('/images/general/diccionario-terminos-meta-quest-3-realidad-virtual.webp', false)}
 		bgposition="center"
 	>

@@ -1,6 +1,6 @@
 ---
 
-let { items } = Astro.props;
+let { items, prefix } = Astro.props;
 items = items.sort(() => Math.random() - 0.5);
 items = items.map(item => item.data).slice(0, 5);
 
@@ -21,7 +21,7 @@ items = items.map(item => item.data).slice(0, 5);
       <p id="destacados-desc" class="max-w-2xl text-pretty text-gray-200 text-xl text-left mb-4 relative z-10">{items[0].description}</p>
       <a
         id="destacados-link"
-        href={items[0].link || '#'}
+        href={prefix + items[0].slug || '#'}
         class="text-white hover:scale-105 transition-all  bg-gradient-to-br from-pink-800 to-pink-500 px-5 py-2 rounded-lg font-medium duration-200 relative z-10"
         target="_blank"
         rel="noopener noreferrer"
@@ -94,7 +94,7 @@ items = items.map(item => item.data).slice(0, 5);
   }
 
   function startRotation() {
-
+    console.log('start!!!')
     autoplay = true;
     const progress = document.getElementById('destacados-progress');
     let startTime = Date.now();
@@ -137,6 +137,12 @@ items = items.map(item => item.data).slice(0, 5);
 
   
   document.addEventListener('astro:page-load', () => {
+    let elementoEncontrado = document.querySelector('#destacados-home');
+    if (!elementoEncontrado) {
+      stopRotation();
+      return;
+    }
+
     startRotation();
     const buttons = document.querySelectorAll('[data-idx]');
     buttons.forEach((btn, idx) => {

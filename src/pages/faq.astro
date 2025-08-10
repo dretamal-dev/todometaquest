@@ -7,6 +7,14 @@ import Filter from '../components/React/Filter.jsx';
 
 import { getOptimizedImage } from '/src/utils/imageUtils.js';
 
+const titulo = 'FAQ - Preguntas Frecuentes sobre Meta Quest 3';
+const desc = 'Encuentra respuestas a las preguntas más comunes sobre Meta Quest 3, desde términos técnicos hasta guías de uso y recomendaciones.';
+const seoObj = {
+  title : titulo,
+  description: desc,
+  image: '/images/general/faq-preguntas-frecuentes-de-meta-quest-3.webp',
+}
+
 const faq = [
   {
     "question": "¿Qué es Meta Quest 3?",
@@ -92,13 +100,13 @@ const faq = [
 
 ---
 
-<Layout>
-	
+<Layout seoObj={seoObj}>
+
 	<Header />
 
 	<ShortHero 
-		title="FAQ - Preguntas Frecuentes sobre Meta Quest 3" 
-		description="Encuentra respuestas a las preguntas más comunes sobre Meta Quest 3, desde términos técnicos hasta guías de uso y recomendaciones."
+		title={titulo}
+		description={desc}
 		image={getOptimizedImage('/images/general/faq-preguntas-frecuentes-de-meta-quest-3.webp', false)}
 		bgposition="center"
 	>

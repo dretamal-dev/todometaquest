@@ -1,0 +1,36 @@
+---
+  import { getOptimizedImage } from '../../utils/imageUtils.js';
+
+	const { seoObj } = Astro.props;
+  const currentDomain = Astro.url.hostname; 
+
+  const title = seoObj?.title??'';
+  const description = seoObj?.description??'';
+  let image = seoObj?.image??'/images/general/hero_bckg_1.webp';
+  image = getOptimizedImage(image, 400);
+  if (!image.startsWith('http')) {
+    image = Astro.url.origin + image;
+  }
+
+  const robots = seoObj?.robots ?? 'index, follow';
+---
+  <title>{title} - {currentDomain}</title>
+  <meta property="og:title" content={`${title} - ${currentDomain}`}>
+  <meta name="twitter:title" content={`${title} - ${currentDomain}`}>
+  
+
+  <meta name="robots" content={robots}>
+
+  <meta property="og:type" content="website">
+  <meta name="author" content={currentDomain}>
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="description" content={description}>
+  <meta property="og:description" content={description}>
+  <meta name="twitter:description" content={description}>
+
+  <meta property="og:url" content={Astro.url.href}>
+  <link rel="canonical" href={Astro.url.href}>
+
+  <meta property="og:image" content={image}>
+  <meta name="twitter:image" content={image}>

@@ -11,15 +11,24 @@ import { getOptimizedImage } from '/src/utils/imageUtils.js';
 import { getCollection } from 'astro:content';
 const juegos = await getCollection('juegos');
 
+
+const titulo = 'Juegos para Meta Quest 3 y Realidad Virtual';
+const desc = 'Explora los mejores juegos para Meta Quest 3 y sumérgete en la realidad virtual.';
+const seoObj = {
+  title : titulo,
+  description: desc,
+  image: '/images/juegos/juegos-realidad-virtual.webp',
+}
+
 ---
 
-<Layout>
-	
+<Layout seoObj={seoObj}>
+
 	<Header />
 
 	<ShortHero 
-		title="Juegos para Meta Quest 3 y Realidad Virtual" 
-		description="Explora guías, juegos y accesorios para disfrutar al máximo tu experiencia de realidad virtual" 
+		title={titulo} 
+		description={desc} 
 		image={getOptimizedImage('/images/juegos/juegos-realidad-virtual.webp', false)}
 		bgposition="top"
 	>

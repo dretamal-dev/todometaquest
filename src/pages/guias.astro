@@ -10,13 +10,21 @@ import { getOptimizedImage } from '/src/utils/imageUtils.js';
 import { getCollection } from 'astro:content';
 const guias = await getCollection('guias');
 
+const titulo = 'Guías Meta Quest 3';
+const desc = 'Explora guías, juegos y accesorios para disfrutar al máximo tu experiencia de realidad virtual';
+const seoObj = {
+  title : titulo,
+  description: desc,
+  image: '/images/guias/guias-informacion-meta-quest-3.webp',
+}
+
 ---
 
-<Layout>
-	
+<Layout seoObj={seoObj}>
+
 	<Header />
 
-	<ShortHero title="Guías Meta Quest 3" description="Explora guías, juegos y accesorios para disfrutar al máximo tu experiencia de realidad virtual" image={getOptimizedImage('/images/guias/guias-informacion-meta-quest-3.webp', false)}>
+	<ShortHero title={titulo} description={desc} image={getOptimizedImage('/images/guias/guias-informacion-meta-quest-3.webp', false)}>
 		<div class="z-2 absolute bottom-0 mb-4">
 			<Filter target=".js-filter-box" client:load/>
 		</div>

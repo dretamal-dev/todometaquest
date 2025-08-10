@@ -11,15 +11,23 @@ import { getOptimizedImage } from '/src/utils/imageUtils.js';
 import { getCollection } from 'astro:content';
 const accesorios = await getCollection('accesorios');
 
+const titulo = 'Los mejores accesorios para Meta Quest 3';
+const desc = 'Descubre los mejores accesorios para Meta Quest 3: mejora tu experiencia de realidad virtual con fundas, correas, baterías, estuches y más. Encuentra recomendaciones, análisis y consejos para sacar el máximo partido a tu visor.';
+const seoObj = {
+  title : titulo,
+  description: desc,
+  image: '/images/general/accesorios-meta-quest-3.webp',
+}
+
 ---
 
-<Layout>
+<Layout seoObj={seoObj}>
 	
 	<Header />
 
 	<ShortHero 
-		title="Los mejores accesorios para Meta Quest 3" 
-		description="Descubre los mejores accesorios para Meta Quest 3: mejora tu experiencia de realidad virtual con fundas, correas, baterías, estuches y más. Encuentra recomendaciones, análisis y consejos para sacar el máximo partido a tu visor."
+		title={titulo} 
+		description={desc}
 		image={getOptimizedImage('/images/general/accesorios-meta-quest-3.webp', false)}
 		bgposition="bottom"
 	>
