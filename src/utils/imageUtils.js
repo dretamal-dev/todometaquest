@@ -29,7 +29,6 @@ export function getOptimizedImage(imagePath, size = false) {
         // For Node.js: use fs to check if file exists
         if (fs.existsSync(optimizedPath)) {
             const publicPath = optimizedPath.replace(/^\.\/public/, '');
-            console.log('eeeeeeeeeeeeeee', publicPath);
             return publicPath;
         }
     } catch (e) {

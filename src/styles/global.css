@@ -40,3 +40,51 @@
   }
 }
 
+
+.css-content{
+  *{
+    @apply text-pretty text-lg text-gray-400
+  }
+  h2{
+    @apply text-4xl my-4 text-gray-200 border-s-8 border-pink-700 ps-4
+  }
+  h3{
+    @apply text-2xl mb-3 text-gray-200
+  }
+  p{
+    @apply mb-6 
+  }
+  b,strong{
+    @apply font-bold text-gray-300 bg-gray-400/5
+  }
+  a:not(.amazon,.meta){
+    @apply text-pink-500 underline hover:text-pink-600
+  }
+  ul {
+    @apply list-disc ps-10 mb-6
+  }
+  ol {
+    @apply list-decimal ps-10 mb-6
+  }
+  img{
+    @apply rounded-2xl max-h-[400px] my-4
+  }
+}
+
+.amazon, .meta {
+  @apply relative inline-block py-2 px-6 shadow-md  hover:shadow-lg transition duration-150 ease-in-out perspective-dramatic;
+  i {
+    @apply active:after:content-["Este_botón_es_un_enlace_de_afiliado._Si_compras_a_través_de_él_ayudarás_a_mantener_este_sitio_web._No_te_supondrá_ningún_coste_extra._¡Gracias!"] 
+    active:after:text-gray-800 active:after:pointer-events-none active:after:h-auto active:after:w-auto active:after:-top-10 active:after:text-xs active:after:text-pretty active:after:rounded-lg active:after:p-1 after:content-['i'] after:w-[20px] after:h-[20px] after:text-sm after:text-center after:rounded-full after:absolute after:-top-5 after:-right-5 after:inline-block after:z-9999 after:bg-gray-100 after:shadow-lg after:border-1 after:border-gray-400 after:text-black after:font-medium;
+  }
+}
+.amazon{
+  @apply font-bold rounded bg-yellow-400 hover:bg-yellow-500 text-gray-900 border border-yellow-600 focus:ring-yellow-300 focus:outline-none focus:ring-2;
+  /* @apply before:content-['Amazon'] before:absolute before:inset-0 before:opacity-10 before:text-yellow-900; */
+  @apply before:content-['Amazon'] before:absolute before:right-4 before:opacity-5 before:text-black before:rotate-[-16deg] before:scale-150;
+}
+.meta{
+  @apply font-medium rounded-full bg-[#005aca] hover:bg-[#0050b3] text-white;  
+  @apply before:content-['Meta'] before:absolute before:right-4 before:opacity-5 before:text-white before:rotate-[-16deg] before:scale-150;
+}
+

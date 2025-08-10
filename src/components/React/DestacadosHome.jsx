@@ -44,9 +44,9 @@ const DestacadosHome = () => {
   const [progress, setProgress] = useState(0);
   const [progressEnabled, setProgressEnabled] = useState(true);
 
-  useEffect(() => {
-    console.log(`Item seleccionado: ${selected.title}`);
-  }, [selected]);
+  // useEffect(() => {
+  //   console.log(`Item seleccionado: ${selected.title}`);
+  // }, [selected]);
 
   useEffect(() => {
     if (!progressEnabled) return;

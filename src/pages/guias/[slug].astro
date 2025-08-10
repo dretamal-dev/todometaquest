@@ -2,7 +2,10 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import ShortHero from '../../components/ShortHero.astro';
+import Card from '../../components/Card.astro';
 import Header from '../../components/Header.astro';
+import Image3D from '../../components/Image3D.astro';
+import { getElementsBySameTags } from '../../lib/getRelated.js';
 import Gallery from '../../components/Gallery.astro';
 import { getOptimizedImage } from '../../utils/imageUtils.js';
 
@@ -20,34 +23,62 @@ const { title, date, img, readtime, description, tags, related_images} = data;
 
 const { Content } = await render(guia);
 
+const relatedElements = await getElementsBySameTags('guias', guia, 4);
+
+function calculateReadTime(text) {
+  const wordsPerMinute = 200;
+  const words = text ? text.split(/\s+/).length : 0;
+  return Math.max(1, Math.ceil(words / wordsPerMinute));
+}
+
+const newReadtime = calculateReadTime(guia.body);
+
 
 
 
 ---
 <Layout title={title} description={data.description}>
-
-
   <Header />
-
 	<ShortHero 
 		title={title} 
 		description={description} 
 		image={getOptimizedImage(img, false)}
 		bgposition="center"
 	>
-		<div class="z-2 absolute bottom-0 mb-4">
-      xxxxxxxx
-    </div>
+    <div class="z-9999">
+      <div class="flex gap-4 z-9999 text-white flex text-center justify-center items-center text-sm">
+        <div>
+          <span>
+            <svg class="w-full max-w-[20px] inline-block stroke-white me-1" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round"></g><g><path d="M12 7V12L14.5 10.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            <span>{newReadtime} min de lectura</span>
+          </span>
+        </div>
+        <div>
+          <span>{new Date(date).toLocaleDateString('es-CL', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        </div>
+      </div>
+      <div class="flex gap-4 mt-4">
+        {tags && tags.map(tag => (
+          <span class="bg-white/20 rounded px-3 py-1 text-xs font-semibold text-white">{tag}</span>
+        ))}
+      </div>
+    </div>  
 	</ShortHero> 
 
-  <div class="flex gap-4 w-9/12 m-auto">
-    <section class="my-4 mb-20 w-9/12 mx-auto m-auto block justify-center transition-transform duration-300">
+  <div class="flex gap-6 w-9/12 m-auto">
+    <section class="my-4 mb-20 w-8/12 mx-auto m-auto block justify-center transition-transform duration-300 css-content">
       <Content />
     </section>
-    <section class="my-4 w-3/12">
+    <section class="my-4 w-4/12 flex flex-col">
       <Gallery images={related_images} />
-    </section>
+      <div class="flex flex-col gap-4 align-middle self-center mt-8 ">
+        <span class="text-2xl ps-2 border-s-8 border-pink-700 hover:animate-glitch">Quizá te interese</span>
+        {relatedElements && relatedElements.map((element: any) => (
+          <Card title={element.data.title} description={element.data.description} image={getOptimizedImage(element.data.img, 400)} link={'/guias/'+element.slug} tags={element.data.tags} date={element.data.date} />
+        ))}
+      </div>
 
+    </section>
   </div>
 
   

@@ -11,6 +11,15 @@ related_images: ['/images/guias/meta-quest-pcvr.jpg','/images/guias/como-usar-em
 ---
 ## Requisitos previos
 
+Antes de comenzar con el proceso para jugar juegos de SteamVR en tu Meta Quest 3, **es fundamental asegurarte de que cuentas con todos los elementos y configuraciones necesarias para evitar problemas durante la instalación y conexión**. En primer lugar, **verifica que tu visor Meta Quest 3 esté actualizado a la última versión del sistema operativo**, ya que las actualizaciones suelen incluir mejoras de compatibilidad y estabilidad esenciales para el correcto funcionamiento con PCVR. Además, **necesitarás un PC que cumpla con los requisitos mínimos para ejecutar SteamVR y los juegos que deseas jugar**; esto incluye una tarjeta gráfica compatible, suficiente memoria RAM y un procesador adecuado. **No olvides instalar tanto Steam como SteamVR en tu ordenador, asegurándote de que ambas aplicaciones estén actualizadas para evitar conflictos de software**.
+
+Otro aspecto importante es la conectividad. Para una experiencia inalámbrica fluida utilizando Air Link, es recomendable contar con una red Wi-Fi de 5 GHz, preferiblemente con el router cerca del área de juego para minimizar la latencia y las posibles interferencias. Si prefieres una conexión más estable y sin cortes, puedes optar por un cable USB 3.0 de buena calidad y suficiente longitud para moverte cómodamente. Recuerda que la calidad del cable puede influir directamente en el rendimiento y la experiencia de juego. Por último, asegúrate de tener instalada la aplicación de Oculus en tu PC y de haber iniciado sesión con tu cuenta de Meta, ya que esto será necesario para vincular el visor y acceder a las funciones de PCVR. Recuerda que lo puedes comprar aqúi:
+
+<a href="https://google.es" class="amazon">Comprar aquí<i></a>
+<a href="https://google.es" class="meta">Comprar aquí<i></a>
+
+Puedes descargar la aplicación de Oculus para PC desde el sitio oficial de Meta: [Descargar Oculus para PC](https://www.meta.com/es-es/quest/setup/).
+
 Antes de comenzar, asegúrate de tener lo siguiente:
 
 - Meta Quest 3 actualizada

@@ -1,0 +1,45 @@
+---
+
+---
+<div class="cookie-banner fixed bottom-0 w-full hidden z-9999 bg-slate-900 text-white">
+    <div class="relative p-4 flex flex-col gap-2 z-1">
+        <h1 class="text-2xl font-bold mb-4">Utilizamos Cookies</h1>
+        <p>
+            Usamos cookies para mejorar su experiencias de navegación en nuestra web, para mostrarle contenidos personalizados y para analizar el tráfico en nuestra web.
+            <a href="/politica-cookies" class="text-blue-500 hover:underline">Ver política de cookies.</a>
+        </p>
+        <div class="flex w-full gap-2 flex-row items-center align-center justify-end">
+            <button 
+                class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                onclick="insertarCookie('todas')"
+                >
+                Aceptar todas las cookies
+            </button>
+            <button 
+                class="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                onclick="insertarCookie('esenciales')"
+                >
+                Aceptar solo las esenciales
+            </button>
+        </div>
+    </div>
+
+    <span class="absolute bottom-0 -left-2 text-9xl scale-150 z-0 opacity-5">🍪</span>
+</div>
+
+<script is:inline data-astro-rerun>
+
+    const insertarCookie = (value) => {
+        document.cookie = 'cookies_aceptadas=' + value + '; path=/; max-age=31536000';
+        document.querySelector('.cookie-banner').remove();
+    }
+
+    document.addEventListener('astro:page-load', () => {
+        const cookies = document.cookie.split(';').map(c => c.trim());
+        const existeCookie = cookies.some(c => c.startsWith('cookies_aceptadas='));
+        if (!existeCookie) {
+            document.querySelector('.cookie-banner').classList.remove('hidden');
+        }
+    });
+
+</script>
