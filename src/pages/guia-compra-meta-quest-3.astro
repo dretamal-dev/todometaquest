@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ShortHero from '../components/ShortHero.astro';
+import Ficha from '../components/Ficha.astro';
+import Header from '../components/Header.astro';
+import { getElementBySlug } from '../lib/collectionLib.js';
+
+import { getOptimizedImage } from '/src/utils/imageUtils.js';
+
+
+
+const fichaMetaQuest3 = await getElementBySlug('fichas', 'meta-quest-3');
+const fichaMetaQuest3S128 = await getElementBySlug('fichas', 'meta-quest-3s-128');
+const fichaMetaQuest3S256 = await getElementBySlug('fichas', 'meta-quest-3s-256');
+
+
+
+
+
+const titulo = 'Guía de compra de Meta Quest 3';
+const desc = '¿Qué modelo de Meta Quest 3 comprar? ¿dónde comprar Meta Quest 3? No te equivoques al elegir la mejor opción para ti.';
+const seoObj = {
+  title : titulo,
+  description: desc,
+  image: '/images/general/guia-compra-meta-quest-3.webp',
+}
+
+---
+
+<Layout seoObj={seoObj}>
+
+	<Header />
+
+	<ShortHero 
+		title={titulo} 
+		description={desc} 
+		image={getOptimizedImage('/images/general/guia-compra-meta-quest-3.webp', false)}
+		bgposition="top"
+	>
+		<div class="z-2 absolute bottom-0 mb-4">
+		</div>
+	</ShortHero> 
+
+
+	
+
+
+	<!-- <Image3D> -->
+
+		<section aria-label="Artículos sobre juegos para Meta Quest 3" class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
+			
+		<!-- <Ficha item={fichaMetaQuest3} align="left"> -->
+		 <div class="flex gap-6 items-start justify-center items-center w-full group">
+
+			 <Ficha item={fichaMetaQuest3S256} align="left"></Ficha>
+			 <Ficha item={fichaMetaQuest3}></Ficha>
+			 <!-- <div class="group-hover:animate-glitch text-8xl">
+				 VS
+			 </div> -->
+			 <Ficha item={fichaMetaQuest3S128} align="right"></Ficha>
+		 </div>
+
+
+		</section>	
+	<!-- </Image3D> -->
+
+</Layout>
+

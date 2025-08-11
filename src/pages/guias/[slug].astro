@@ -6,7 +6,7 @@ import Card from '../../components/Card.astro';
 import ContentImagePopUp from '../../components/ContentImagePopUp.astro';
 import Header from '../../components/Header.astro';
 import Image3D from '../../components/Image3D.astro';
-import { getElementsBySameTags } from '../../lib/getRelated.js';
+import { getElementsBySameTags } from '../../lib/collectionLib.js';
 import Gallery from '../../components/Gallery.astro';
 import { getOptimizedImage } from '../../utils/imageUtils.js';
 
@@ -79,7 +79,7 @@ const newReadtime = calculateReadTime(guia.body);
 	</ShortHero> 
 
   <div class="flex gap-6 w-9/12 m-auto">
-    <section class="my-4 mb-20 w-8/12 mx-auto m-auto block justify-center transition-transform duration-300 css-content">
+    <section aria-label={title} class="my-4 mb-20 w-8/12 mx-auto m-auto block justify-center transition-transform duration-300 css-content">
       <Content />
     </section>
     <section class="my-4 w-4/12 flex flex-col">

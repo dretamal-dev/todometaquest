@@ -36,7 +36,7 @@ const seoObj = {
 		</div>
 	</ShortHero> 
 
-	<section aria-label="Artículos sobre accesorios para Meta Quest 3" class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
+	<section aria-label={titulo} class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
 			{accesorios.map(accesorio => (
 				<Card date={accesorio.data.date} tags={accesorio.data.tags} title={accesorio.data.title} description={accesorio.data.description} image={getOptimizedImage(accesorio.data.img, 400)} link={'/accesorios/' + accesorio.slug} />
 			))}

@@ -325,7 +325,7 @@ terminos.sort((a, b) => a.term.localeCompare(b.term));
 		</div>
 	</ShortHero> 
 
-  <section aria-label="Listado de términos" class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
+  <section aria-label={titulo} class="my-4 mb-20 w-9/12 mx-auto m-auto flex flex-wrap gap-4 justify-center js-filter-box transition-transform duration-300">
     <ul class="js-filter-box divide-y divide-gray-700">
       {terminos.map(termino => (				
         <li id={termino.term.toLowerCase().replace(/\s+/g, '-')} class="p-4 mb-2 rounded-t-md hover:bg-slate-900 hover:scale-105 transition-all duration-200" data-jsfilter-search={termino.term} >

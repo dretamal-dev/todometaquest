@@ -45,6 +45,27 @@ const accesorios = defineCollection({
   })
 });
 
+const fichas = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    caption: z.string().optional(),
+    description: z.string(),
+    img: z.string().optional(),
+    precio: z.string().optional(),
+    home: z.boolean().optional(),
+    pros: z.array(z.string()).optional(),
+    cons: z.array(z.string()).optional(),
+    points: z.array(z.object({
+      title: z.string(),
+      point: z.number()
+    })).optional(),
+    refer: z.object({
+      class: z.string(),
+      link: z.string().url()
+    }).optional()
+  })
+});
+
 const experiencias = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -53,4 +74,4 @@ const experiencias = defineCollection({
   })
 });
 
-export const collections = { 'guias': guias, 'juegos': juegos, 'accesorios': accesorios, 'experiencias': experiencias };
+export const collections = { 'guias': guias, 'juegos': juegos, 'accesorios': accesorios, 'experiencias': experiencias, 'fichas': fichas };

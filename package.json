@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "optimizar-img": "node scripts/optimizarImagenes.js"
+    "webp": "node scripts/optimizarImagenes.js"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",

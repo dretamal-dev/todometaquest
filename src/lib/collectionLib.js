@@ -7,3 +7,8 @@ export async function getElementsBySameTags(collectionName, parentElement, count
   });
   return posts.slice(0, count);
 }
+
+export async function getElementBySlug(collectionName, slug) {
+  const posts = await getCollection(collectionName);
+  return posts.find(post => post.slug === slug);
+}
