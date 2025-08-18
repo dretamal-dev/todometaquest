@@ -8,6 +8,7 @@ OPT_IMG_OUTPUT_DIR = 'public/optimized'
 
 export function getOptimizedImage(imagePath, size = false) {
 
+    if (!imagePath) return '';
     if (!size) return imagePath;
 
     dotenv.config();

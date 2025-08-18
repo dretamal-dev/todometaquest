@@ -4,7 +4,7 @@ import ShortHero from '../components/ShortHero.astro';
 import Ficha from '../components/Ficha.astro';
 import Header from '../components/Header.astro';
 import { getElementBySlug } from '../lib/collectionLib.js';
-
+import ContentImagePopUp from '/src/components/ContentImagePopUp.astro';
 import { getOptimizedImage } from '/src/utils/imageUtils.js';
 
 
@@ -63,6 +63,8 @@ const seoObj = {
 
 		</section>	
 	<!-- </Image3D> -->
+	
+	<ContentImagePopUp />
 
 </Layout>
 

@@ -15,20 +15,21 @@ if (align === 'center' || align === 'right' || align === 'left') {
 <HtmlTag align={align}>
 
 
-  <div class="relative group w-[500px] flex flex-col items-center justify-center bg-gradient-to-b from-zinc-800 to-zinc-900 rounded-2xl overflow-hidden shadow-2xl">
+  <div class="js-ficha relative group w-[500px] flex flex-col items-center justify-center bg-gradient-to-b from-zinc-800 to-zinc-900 rounded-2xl overflow-hidden shadow-2xl">
+    <div class="absolute z-2 top-0 right-0 js-open-popup cursor-pointer hover:scale-125 m-4 transition-transform duration-300" data-img={getOptimizedImage(item?.data?.img, false)}>📷</div>
     <div class="h-[300px] w-full relative p-4 flex flex-col justify-end">
-      <div class="absolute top-0 left-0 h-full bg-cover bg-center w-full object-cover z-0 mask-b-from-20%" style={`background-image: url(${getOptimizedImage(item.data.img, 400)});`}></div>
-      <h2 class="z-2 text-3xl mb-1 group-hover:animate-glitch">{item.data.title}</h2>
-      <h3 class="text-lg italic">{item.data.caption}</h3>
-      {item.data.precio && (
-        <div class="z-2 text-6xl font-bold text-start px-3 py-1">{item.data.precio}</div>
+      <div class="absolute top-0 left-0 h-full bg-cover bg-center w-full object-cover z-0 mask-b-from-20%" style={`background-image: url(${getOptimizedImage(item?.data?.img, 400)});`}></div>
+      <h2 class="z-2 text-3xl mb-1 group-hover:animate-glitch">{item?.data?.title}</h2>
+      <h3 class="text-lg italic">{item?.data?.caption}</h3>
+      {item?.data?.precio && (
+        <div class="z-2 text-6xl font-bold text-start px-3 py-1">{item?.data?.precio}</div>
       )}
     </div>
     <div class="p-4">
-      <p class="text-zinc-300 text-sm text-pretty">{item.data.description}</p>
+      <p class="text-zinc-300 text-sm text-pretty">{item?.data?.description}</p>
     </div>
     <div class="p-4 flex justify-start flex-col w-full">
-      {item.data.pros && item.data.pros.length > 0 && (
+      {item?.data?.pros && item?.data?.pros.length > 0 && (
         <>
         <span class="mb-1">✅ Pros:</span>
         <ul class="list-disc mb-4 ps-6">
@@ -38,22 +39,22 @@ if (align === 'center' || align === 'right' || align === 'left') {
         </ul>
         </>
       )}
-      
-      {item.data.cons && item.data.cons.length > 0 && (
+
+      {item?.data?.cons && item?.data?.cons.length > 0 && (
         <>
         <span class="mb-1">❌ Contras:</span>
         <ul class="list-disc mb-4 ps-6">
-          {item.data.cons.map((con:string) => (
+          {item?.data?.cons.map((con:string) => (
             <li class="text-zinc-400 text-sm">{con}</li>
           ))}
         </ul>
         </>
       )}
 
-      {item.data.points && item.data.points.length > 0 && (
+      {item?.data?.points && item?.data?.points.length > 0 && (
         <div class="mt-4 mb-2 flex justify-between align-middle gap-2">
           <ul class="w-1/2">
-            {item.data.points.map((pointObj: { title: string, point: number }, idx: number) => (
+            {item?.data?.points.map((pointObj: { title: string, point: number }, idx: number) => (
               <li class="text-zinc-400 text-sm mb-2 flex flex-col gap-1">
                 <div class="w-full h-6 bg-zinc-700 rounded flex items-center relative">
                   <div
@@ -82,8 +83,8 @@ if (align === 'center' || align === 'right' || align === 'left') {
           </div>
         </div>
       )}
-      
-      {item.data.refer && (
+
+      {item?.data?.refer && (
         <div class="mt-6 mb-2 flex justify-between align-middle gap-2">
           <a
             href={item.data.refer.link}

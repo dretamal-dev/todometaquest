@@ -25,7 +25,8 @@ const juegos = defineCollection({
     readtime: z.number(),
     description: z.string(),
     home: z.boolean().optional(),
-    tags: z.array(z.string()).optional()
+    tags: z.array(z.string()).optional(),
+    related_images: z.array(z.string()).optional(),
   })
 });
 
@@ -41,7 +42,9 @@ const accesorios = defineCollection({
     description: z.string(),
     caption: z.string(),
     home: z.boolean().optional(),
-    tags: z.array(z.string()).optional()
+    tags: z.array(z.string()).optional(),
+    related_images: z.array(z.string()).optional(),
+    fichas: z.array(z.string()).optional(),
   })
 });
 

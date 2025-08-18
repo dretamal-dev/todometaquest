@@ -1,0 +1,71 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ShortHero from '../../components/ShortHero.astro';
+import ContentImagePopUp from '../../components/ContentImagePopUp.astro';
+import Header from '../../components/Header.astro';
+import ResumenPost from '../../components/ResumenPost.astro';
+import { getOptimizedImage } from '../../utils/imageUtils.js';
+import { getElementBySlug } from '../../lib/collectionLib.js';
+import Ficha from '../../components/Ficha.astro';
+
+export async function getStaticPaths() {
+  const accesorios = await getCollection('accesorios');
+  if (!accesorios || accesorios.length === 0) {
+    return [];
+  }
+  return accesorios.map(accesorio => ({
+    params: { slug: accesorio?.slug },
+    props: { accesorio }
+  }));
+}
+
+
+
+const { accesorio } = Astro.props;
+const { data } = accesorio; 
+const { title, date, fichas, img, readtime, description, tags, related_images} = data;
+const { Content } = await render(accesorio);
+const seoObj = {
+  title : title,
+  description: data.description,
+  image: img
+}
+
+
+const fichasArray = await Promise.all(
+  Array.isArray(fichas) && fichas.length > 0
+    ? fichas.map((ficha) => getElementBySlug('fichas', ficha))
+    : []
+);
+
+
+---
+<Layout seoObj={seoObj}>
+  <Header />
+	<ShortHero 
+		title={title} 
+		description={description} 
+		image={getOptimizedImage(img, false)}
+		bgposition="center"
+	>
+
+    <ResumenPost item={accesorio} />
+
+	</ShortHero> 
+
+  <div class="flex flex-wrap gap-5 my-8 w-10/12 m-auto">
+    {fichasArray.map((ficha) => (
+      <Ficha item={ficha} />
+    ))}
+  </div>
+
+  <div class="flex gap-6 w-9/12 m-auto mt-8">
+    <section aria-label={title} class="my-4 mt-8 mb-20 w-8/12 mx-auto m-auto block justify-center transition-transform duration-300 css-content">
+      <Content />
+    </section>
+  </div>
+  
+  <ContentImagePopUp />
+
+</Layout> 

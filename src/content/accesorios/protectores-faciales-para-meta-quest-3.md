@@ -1,7 +1,7 @@
 ---
 title: Protectores faciales
 author: David
-img: /images/guias/arreglar.jpg
+img: /images/accesorios/protector-facial-meta-quest-3.webp
 modelo: /images/accesorios/facial.png
 readtime: 224
 description: Disparos, peleas, explosiones… estos juegos de acción en VR no te dejarán descansar.

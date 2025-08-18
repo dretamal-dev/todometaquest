@@ -1,7 +1,7 @@
 ---
 title: Mandos alternativos y grips
 author: David
-img: /images/guias/arreglar.jpg
+img: /images/accesorios/controladores-grips-meta-quest-3.webp
 modelo: /images/accesorios/grips.png
 readtime: 224
 description: Disparos, peleas, explosiones… estos juegos de acción en VR no te dejarán descansar.

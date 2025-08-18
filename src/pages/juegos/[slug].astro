@@ -11,22 +11,22 @@ import Gallery from '../../components/Gallery.astro';
 import { getOptimizedImage } from '../../utils/imageUtils.js';
 
 export async function getStaticPaths() {
-  const guias = await getCollection('guias');
-  if (!guias || guias.length === 0) {
+  const juegos = await getCollection('juegos');
+  if (!juegos || juegos.length === 0) {
     return [];
   }
-  return guias.map(guia => ({
-    params: { slug: guia?.slug },
-    props: { guia }
+  return juegos.map(juego => ({
+    params: { slug: juego?.slug },
+    props: { juego }
   }));
 }
 
 
 
-const { guia } = Astro.props;
-const { data } = guia; 
+const { juego } = Astro.props;
+const { data } = juego; 
 const { title, date, img, readtime, description, tags, related_images} = data;
-const { Content } = await render(guia);
+const { Content } = await render(juego);
 const seoObj = {
   title : title,
   description: data.description,
@@ -34,7 +34,7 @@ const seoObj = {
 }
 
 
-const relatedElements = await getElementsBySameTags('guias', guia, 4);
+const relatedElements = await getElementsBySameTags('juegos', juego, 4);
 
 
 
@@ -47,8 +47,9 @@ const relatedElements = await getElementsBySameTags('guias', guia, 4);
 		image={getOptimizedImage(img, false)}
 		bgposition="center"
 	>
-        <ResumenPost item={guia} />
 
+    <ResumenPost item={juego} />
+     
 	</ShortHero> 
 
   <div class="flex gap-6 w-9/12 m-auto">
