@@ -1,7 +1,6 @@
 ---
 const { title, description, image, link, tags, date} = Astro.props;
 
-console.log(link)
 ---
 
 <article
@@ -25,6 +24,6 @@ console.log(link)
       <a href={link} >
         <h3 class="font-bold text-xl mb-1 text-white">{title}</h3>
       </a>
-      <p class="text-sm text-zinc-300 mb-2">{description}</p>
+      <p class="text-sm text-zinc-300 mb-2 line-clamp-4" title={description}>{description}</p>
     </div>
 </article>

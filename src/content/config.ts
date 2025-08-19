@@ -64,7 +64,8 @@ const fichas = defineCollection({
     })).optional(),
     refer: z.object({
       class: z.string(),
-      link: z.string().url()
+      // link: z.string().url()
+      link: z.string()
     }).optional()
   })
 });

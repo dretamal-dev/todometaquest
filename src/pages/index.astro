@@ -7,6 +7,7 @@ import SectionCards from '../components/SectionCards.astro';
 import AccesoriosHome from '../components/AccesoriosHome.astro';
 // import DestacadosHome from '../components/React/DestacadosHome.jsx';
 import DestacadosHome from '../components/DestacadosHome.astro';
+import Separador from '../components/Separador.astro';
 
 
 import { getCollection } from 'astro:content';
@@ -15,12 +16,13 @@ const juegos = await getCollection('juegos', ({ data }) => data.home === true);
 const accesorios = await getCollection('accesorios', ({ data }) => data.home === true);
 // const guias = await getCollection('guias');
 
-const titulo = 'xxxxxxxxxx';
-const desc = 'xxxxxxxxxxx';
+const titulo = 'Misión Tres: Domina tus Meta Quest 3';
+const desc = 'Guías, comparativas, recomendaciones de juegos y experiencias VR para que disfrutes al máximo de tus Meta Quest 3';
 const seoObj = {
   title : titulo,
   description: desc,
-  image: '/images/general/hero_bckg_1.webp',
+  // image: '/images/general/hero_bckg_1.webp',
+  image: '/images/general/mision-tres-meta-quest.webp',
 }
 
 ---
@@ -31,8 +33,11 @@ const seoObj = {
 	<Hero />
 
 	<main class="my-4 w-9/12 mx-auto m-auto">
+		<Separador link="/guias/" text="Ver todas las guías" />
 		<DestacadosHome items={guias} prefix="/guias/"/>
+		<Separador link="/juegos/" text="Ver todos los artículos de juegos" />
 		<SectionCards items={juegos} prefix="/juegos/"/>
+		<Separador link="/accesorios/" text="Ver todos los accesorios" />
 		<AccesoriosHome items={accesorios} />
 	</main>	
 

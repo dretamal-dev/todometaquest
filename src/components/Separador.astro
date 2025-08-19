@@ -1,0 +1,6 @@
+---
+const { link, text} = Astro.props;
+
+---
+
+<div class="group w-11/12 m-auto text-right mb-6 after:content-[''] after:bg-gradient-to-r after:from-sky-500/0 after:via-sky-700 after:to-fuchsia-700 after:w-full after:block after:h-[2px]"><a href={link} class="hover:animate-glitch font-mono text-sm">{text} <span class="group-hover:ms-5  group-hover:scale-x-[-1] inline-block transition-all duration-200">⨠</span></a></div>
